@@ -3,12 +3,12 @@ var config = {
   // gitter settings for retrieving and sending messages
   gitter: {
     // gitter token, can be retrieved from https://developer.gitter.im/apps
-    token: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    token: '122496bd738d5708a217116f65a12a3eb086ca1a',
 
 
     room: {
       // name of the gitter room, you want to retrieve and send the messages
-      name: 'bullgit/bombing'
+      name: 'TheOdinProject/bot-spam-playground'
     },
     
     // custom webhook to send the gifs to the activity feed
@@ -24,7 +24,7 @@ var config = {
   giphy: {
    
    // giphy api key
-   apikey: 'xxxxxxxxxxxxx',
+   apikey: 'dc6zaTOxFJmzC',
    
    // regex to match the giphy command (could be anything)
    regex: /^\/giphy/
