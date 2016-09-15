@@ -12,7 +12,7 @@ var config = {
     },
     
     // custom webhook to send the gifs to the activity feed
-    webhook: 'https://webhooks.gitter.im/e/57da9ae340f3a6eec065648a',
+    webhook: 'https://webhooks.gitter.im/e/ca75b94537a0fb91d19f',
     
     // place, where gif should be sent
     // possibilities: activity, chat
