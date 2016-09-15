@@ -17,7 +17,7 @@ var config = {
     // place, where gif should be sent
     // possibilities: activity, chat
     // if "chat" the message will be send from the user from whom the token is
-    place: 'activity'
+    place: 'chat'
 
   },
   
