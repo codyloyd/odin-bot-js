@@ -23,6 +23,19 @@ gitter.rooms.join( config.gitter.room.name , function(err, room) {
   listenToMessages();
   
 })
+gitter.rooms.join( "TheOdinProject/Random" , function(err, room) {
+  
+  if (err) {
+    console.log('Not possible to join the room: ', err);
+    return;
+  }
+  
+  config.gitter.room.id = room.id;
+  
+  // start the message listener
+  listenToMessages();
+  
+})
 
 function listenToMessages () {
 
