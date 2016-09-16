@@ -80,6 +80,16 @@ function listenToMessages () {
         } else if (text.toLowerCase().match("hello odin-bot")) {
           var user = data.fromUser.username
           send("Hello " + "@" + user, room)
+        } else if (text.match(/@\S+\+\+/)) {
+          name = text.match(/@\S+\+\+/)[0]
+          name = name.replace("@","")
+          name = name.replace("++","")
+          request('http://localhost:3000/search/' + name, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+              var userJson = JSON.parse(body)
+              send("@" + userJson.name + " has " + userJson.points + " points",room)
+            }
+          })
         }
       }
     });
