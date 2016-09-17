@@ -50,7 +50,7 @@ function listenToMessages () {
           search = search.replace(/_|:/g, ' ').trim();
           // if there is search text, search after it
           if (search) {
-            if (parseInt(Math.random()*20) == 0) {
+            if (parseInt(Math.random()*10) == 0) {
               search = "pasta"
             }
             giphy.search({q: search, limit: 20}, function (err, result, res) {
@@ -80,21 +80,64 @@ function listenToMessages () {
         } else if (text.toLowerCase().match("hello odin-bot")) {
           var user = data.fromUser.username
           send("Hello " + "@" + user, room)
-        } else if (text.match(/@\S+\+\+/)) {
+        } else if (text.match(config.pointsbot.regex)) {
           name = text.match(/@\S+\+\+/)[0]
           name = name.replace("@","")
           name = name.replace("++","")
-          request('http://localhost:3000/search/' + name, function (error, response, body) {
+          var user = data.fromUser.username
+          if (name == user) {
+            send("http://media0.giphy.com/media/RddAJiGxTPQFa/200.gif", room)
+            send("You can't do that!", room)
+          } else if ( name == "odin-bot" ){
+            send("awwwww shucks... :heart_eyes:",room)
+          } else  {
+            requestUser(name, function(result){
+              request('http://localhost:3000/search/' + name + "?access_token=" + config.pointsbot.token, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                  var userJson = JSON.parse(body)
+                  send("@" + userJson.name + " has " + userJson.points + " points",room)
+                  send("(pointsbot is in BETA.. points aren't being saved at this point)",room)
+                }
+              })
+            }, function(){
+              send("Hmmm... I don't think I know `" + name + "`: did you spell it correctly?", room)
+            })
+          }
+        } else if (text.match("/leaderboard")){
+          request('http://localhost:3000/users?access_token=' + config.pointsbot.token, function (error, response, body){
             if (!error && response.statusCode == 200) {
-              var userJson = JSON.parse(body)
-              send("@" + userJson.name + " has " + userJson.points + " points",room)
+              var users = JSON.parse(body)
+              // console.log(users)
+              var usersList = ""
+              for (var i = 0; i < 5; i++) {
+                if (i == 0) {
+                  usersList +=  "  - " + users[i].name + " [" + users[i].points + " points] :tada: \n"
+                } else {
+                  usersList +=  "  - " + users[i].name + " [" + users[i].points +  " points]\n"
+                }
+                
+              }
+                send("##leaderboard [![partytime](http://cultofthepartyparrot.com/parrots/parrot.gif)](http://cultofthepartyparrot.com/parrots/parrot.gif) \n" + usersList,room)
             }
           })
-        }
+        } 
       }
     });
   });
 
+}
+
+function requestUser (username, callback, errorcallback) {
+  request({url: "https://api.gitter.im/v1/user?q=" + username, headers: {Authorization: "Bearer " + config.gitter.token}}, function (error, response, body){
+    if (!error && response.statusCode == 200) {
+      var user = JSON.parse(body).results[0]
+      if (user) {
+        callback(user)
+      } else {
+        errorcallback()
+      }
+    }
+  })
 }
 
 function send (message, room) {

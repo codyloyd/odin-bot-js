@@ -33,8 +33,7 @@ var config = {
   pointsbot: {
     token: process.env.POINTSBOT_TOKEN,
     regex: /@\S+\s?\+\+/
-  }
-
+  },
 }
 
 module.exports = config;
