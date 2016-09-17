@@ -77,9 +77,6 @@ function listenToMessages () {
             var help = '@' + user + ': use `/giphy` with a word, to get a gif related to that word, eg. `/giphy cats hats`';
             send(help, room);
           }
-        } else if (text.toLowerCase().match("hello odin-bot")) {
-          var user = data.fromUser.username
-          send("Hello " + "@" + user, room)
         } else if (text.match(config.pointsbot.regex)) {
           name = text.match(/@\S+\+\+/)[0]
           name = name.replace("@","")
@@ -95,7 +92,8 @@ function listenToMessages () {
               request('http://localhost:3000/search/' + name + "?access_token=" + config.pointsbot.token, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                   var userJson = JSON.parse(body)
-                  send("@" + userJson.name + " has " + userJson.points + " points",room)
+                  var points = pointsPluralizer(userJson.points)
+                  send("@" + userJson.name + " has " + userJson.points + " " + points ,room)
                   send("(pointsbot is in BETA.. points aren't being saved at this point)",room)
                 }
               })
@@ -124,7 +122,14 @@ function listenToMessages () {
       }
     });
   });
+}
 
+function pointsPluralizer(points) {
+  if (points == 1) {
+    return "point"
+  } else {
+    return "points"
+  }
 }
 
 function requestUser (username, callback, errorcallback) {
@@ -156,5 +161,4 @@ function send (message, room) {
       console.log(message);
       break;
   }
-  
 }
