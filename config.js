@@ -29,6 +29,11 @@ var config = {
    // regex to match the giphy command (could be anything)
    regex: /^\/giphy/
 
+  },
+
+  pointsbot: {
+    token: 'dba4f3e371fd2f4fd01fe312ff84fa55',
+    regex: /@\S+\+\+/
   }
 
 }
