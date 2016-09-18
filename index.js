@@ -82,7 +82,7 @@ function listenToMessages () {
             send(help, room);
           }
         } else if (text.match(config.pointsbot.regex)) {
-          name = text.match(/@\S+\+\+/)[0]
+          name = text.match(/@\S+\s?\+\+/)[0]
           name = name.replace("@","")
           name = name.replace("++","")
           var user = data.fromUser.username
