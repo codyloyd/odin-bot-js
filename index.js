@@ -97,7 +97,7 @@ function listenToMessages () {
                 if (!error && response.statusCode == 200) {
                   var userJson = JSON.parse(body)
                   var points = pointsPluralizer(userJson.points)
-                  send("@" + userJson.name + " has " + userJson.points + " " + points ,room)
+                  send("Sweet! @" + userJson.name + " now has " + userJson.points + " " + points ,room)
                 }
               })
             }, function(){
