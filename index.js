@@ -10,24 +10,28 @@ var gitter = new Gitter(config.gitter.token);
 var giphy = new Giphy(config.giphy.apikey);
 
 // gitter room name from config gets joined, to receive the room id on start
-gitter.rooms.join( config.gitter.room.name , function(err, room) {
-  if (err) {
-    console.log('Not possible to join the room: ', err);
-    return;
-  }
-  config.gitter.room.id = room.id;
-  // start the message listener
-  listenToMessages();
-})
-gitter.rooms.join( "TheOdinProject/Random" , function(err, room) {
-  if (err) {
-    console.log('Not possible to join the room: ', err);
-    return;
-  }
-  config.gitter.room.id = room.id;
-  // start the message listener
-  listenToMessages();
-})
+rooms = ["Random","bot-spam-playground", "theodinproject","Web-Development-101","Ruby","Rails","HTML-CSS","Javascript"]
+for (var i = 0; i < rooms.length; i++) {
+  gitter.rooms.join( "TheOdinProject/" + rooms[i] , function(err, room) {
+    if (err) {
+      console.log('Not possible to join the room: ', err);
+      return;
+    }
+    config.gitter.room.id = room.id;
+    // start the message listener
+    listenToMessages();
+  })
+}  
+
+// gitter.rooms.join( "TheOdinProject/Random" , function(err, room) {
+//   if (err) {
+//     console.log('Not possible to join the room: ', err);
+//     return;
+//   }
+//   config.gitter.room.id = room.id;
+//   // start the message listener
+//   listenToMessages();
+// })
 
 function listenToMessages () {
   gitter.rooms.find(config.gitter.room.id).then(function(room) {
@@ -83,18 +87,17 @@ function listenToMessages () {
           name = name.replace("++","")
           var user = data.fromUser.username
           if (name == user) {
-            send("http://media0.giphy.com/media/RddAJiGxTPQFa/200.gif", room)
+            send("![](http://media0.giphy.com/media/RddAJiGxTPQFa/200.gif)", room)
             send("You can't do that!", room)
           } else if ( name == "odin-bot" ){
             send("awwwww shucks... :heart_eyes:",room)
           } else  {
             requestUser(name, function(result){
-              request('http://localhost:3000/search/' + name + "?access_token=" + config.pointsbot.token, function (error, response, body) {
+              request('https://odin-points-bot.herokuapp.com/search/' + name + "?access_token=" + config.pointsbot.token, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                   var userJson = JSON.parse(body)
                   var points = pointsPluralizer(userJson.points)
                   send("@" + userJson.name + " has " + userJson.points + " " + points ,room)
-                  send("(pointsbot is in BETA.. points aren't being saved at this point)",room)
                 }
               })
             }, function(){
@@ -102,16 +105,17 @@ function listenToMessages () {
             })
           }
         } else if (text.match("/leaderboard")){
-          request('http://localhost:3000/users?access_token=' + config.pointsbot.token, function (error, response, body){
+          request('https://odin-points-bot.herokuapp.com/users?access_token=' + config.pointsbot.token, function (error, response, body){
             if (!error && response.statusCode == 200) {
               var users = JSON.parse(body)
               // console.log(users)
               var usersList = ""
-              for (var i = 0; i < 5; i++) {
+              var looplength = function(length) { if (length < 5) { return length} else { return 5 } }(users.length)
+              for (var i = 0; i < looplength; i++) {
                 if (i == 0) {
-                  usersList +=  "  - " + users[i].name + " [" + users[i].points + " points] :tada: \n"
+                  usersList +=  "  - @" + users[i].name + " [" + users[i].points + " points] :tada: \n"
                 } else {
-                  usersList +=  "  - " + users[i].name + " [" + users[i].points +  " points]\n"
+                  usersList +=  "  - @" + users[i].name + " [" + users[i].points +  " points]\n"
                 }
                 
               }
