@@ -85,6 +85,7 @@ function listenToMessages () {
           name = text.match(/@\S+\s?\+\+/)[0]
           name = name.replace("@","")
           name = name.replace("++","")
+          name = name.replace(" ", "")
           var user = data.fromUser.username
           if (name == user) {
             send("![](http://media0.giphy.com/media/RddAJiGxTPQFa/200.gif)", room)

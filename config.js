@@ -33,7 +33,7 @@ var config = {
 
   pointsbot: {
     token: '51b3ba1beec78d389dc21af70db66491',
-    regex: /@\S+\+\+/
+    regex: /@\S+\s?\+\+/
   }
 
 }
