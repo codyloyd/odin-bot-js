@@ -5,6 +5,7 @@ var Giphy = require('giphy');
 // get configuration infos from config.js file
 // if non available, copy config.example.js and fill out the 
 var config = require('./config.js');
+var time = 0
 
 var gitter = new Gitter(config.gitter.token);
 var giphy = new Giphy(config.giphy.apikey);
@@ -93,6 +94,10 @@ function listenToMessages () {
           } else if ( name == "odin-bot" ){
             send("awwwww shucks... :heart_eyes:",room)
           } else  {
+            var time = elapsedTime()
+            if (time > 108000) {
+              send("calculating points....",room)
+            }
             requestUser(name, function(result){
               request('https://odin-points-bot.herokuapp.com/search/' + name + "?access_token=" + config.pointsbot.token, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
@@ -106,6 +111,10 @@ function listenToMessages () {
             })
           }
         } else if (text.match("/leaderboard")){
+          var time = elapsedTime()
+          if (time > 108000) {
+            send("calculating points....",room)
+          }
           request('https://odin-points-bot.herokuapp.com/users?access_token=' + config.pointsbot.token, function (error, response, body){
             if (!error && response.statusCode == 200) {
               var users = JSON.parse(body)
@@ -127,6 +136,17 @@ function listenToMessages () {
       }
     });
   });
+}
+
+//record time of event
+function getTime () {
+  return new Date().getTime()
+}
+
+function elapsedTime() {
+  var elapsedSeconds = (getTime() - time) / 1000
+  time = getTime()
+  return elapsedSeconds
 }
 
 function pointsPluralizer(points) {
