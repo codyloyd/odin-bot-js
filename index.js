@@ -55,7 +55,7 @@ function listenToMessages () {
           search = search.replace(/_|:/g, ' ').trim();
           // if there is search text, search after it
           if (search) {
-            if (parseInt(Math.random()*10) == 0) {
+            if (parseInt(Math.random()*20) == 0) {
               search = "pasta"
             }
             giphy.search({q: search, limit: 20}, function (err, result, res) {
@@ -74,6 +74,13 @@ function listenToMessages () {
                 // otherwise send a message, that there are no gifs with that search
                 var help = '@' + user + ': there is no gif with those words';
                 send(help, room);
+                giphy.search({q: "FAIL", limit: 10}, function (err, result, res) {
+                  if (result.data.length) {
+                    var image = result.data[parseInt(Math.random()*result.data.length)]
+                    var imgurl = image.images.original.url;
+                    send("![](" + imgurl + ")",room)
+                  }
+                })
               }
               
             });
