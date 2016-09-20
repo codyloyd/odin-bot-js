@@ -86,7 +86,7 @@ function listenToMessages () {
           name = name.replace("++","")
           name = name.replace(" ", "")
           var user = data.fromUser.username
-          if (name.downcase == user.downcase) {
+          if (name.toLowerCase() == user.toLowerCase()) {
             send("![](http://media0.giphy.com/media/RddAJiGxTPQFa/200.gif)", room)
             send("You can't do that!", room)
           } else if ( name == "odin-bot" ){
@@ -97,7 +97,7 @@ function listenToMessages () {
               send("calculating points....",room)
             }
             requestUser(name, function(result){
-              request('https://odin-points-bot.herokuapp.com/search/' + name + "?access_token=" + config.pointsbot.token, function (error, response, body) {
+              request('https://odin-points-bot.herokuapp.com/search/' + result.username + "?access_token=" + config.pointsbot.token, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                   var userJson = JSON.parse(body)
                   var points = pointsPluralizer(userJson.points)
