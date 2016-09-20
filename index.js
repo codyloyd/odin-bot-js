@@ -24,16 +24,6 @@ for (var i = 0; i < rooms.length; i++) {
   })
 }  
 
-// gitter.rooms.join( "TheOdinProject/Random" , function(err, room) {
-//   if (err) {
-//     console.log('Not possible to join the room: ', err);
-//     return;
-//   }
-//   config.gitter.room.id = room.id;
-//   // start the message listener
-//   listenToMessages();
-// })
-
 function listenToMessages () {
   gitter.rooms.find(config.gitter.room.id).then(function(room) {
     var events = room.streaming().chatMessages();
@@ -89,13 +79,14 @@ function listenToMessages () {
             var help = '@' + user + ': use `/giphy` with a word, to get a gif related to that word, eg. `/giphy cats hats`';
             send(help, room);
           }
+        // text contains the ++ command  
         } else if (text.match(config.pointsbot.regex)) {
           name = text.match(/@\S+\s?\+\+/)[0]
           name = name.replace("@","")
           name = name.replace("++","")
           name = name.replace(" ", "")
           var user = data.fromUser.username
-          if (name == user) {
+          if (name.downcase == user.downcase) {
             send("![](http://media0.giphy.com/media/RddAJiGxTPQFa/200.gif)", room)
             send("You can't do that!", room)
           } else if ( name == "odin-bot" ){
@@ -117,6 +108,7 @@ function listenToMessages () {
               send("Hmmm... I don't think I know `" + name + "`: did you spell it correctly?", room)
             })
           }
+        //text contains the leaderboard command  
         } else if (text.match("/leaderboard")){
           var time = elapsedTime()
           if (time > 108000) {
