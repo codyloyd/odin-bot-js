@@ -11,7 +11,7 @@ var gitter = new Gitter(config.gitter.token);
 var giphy = new Giphy(config.giphy.apikey);
 
 // gitter room name from config gets joined, to receive the room id on start
-rooms = ["Random","bot-spam-playground", "theodinproject","Web-Development-101","Ruby","Rails","HTML-CSS","Javascript"]
+rooms = ["Random","bot-spam-playground", "theodinproject","Ruby","Rails","HTML-CSS","Javascript"]
 for (var i = 0; i < rooms.length; i++) {
   gitter.rooms.join( "TheOdinProject/" + rooms[i] , function(err, room) {
     if (err) {
@@ -131,7 +131,11 @@ function listenToMessages () {
                 send("##leaderboard [![partytime](http://cultofthepartyparrot.com/parrots/parrot.gif)](http://cultofthepartyparrot.com/parrots/parrot.gif) \n" + usersList,room)
             }
           })
-        } 
+        } else if (text.match("windows")){
+          if (parseInt(Math.random()*6) == 0 && data.fromUser.username != "odin-bot") {
+            send('##did somebody say windows? \n\n![](http://i.imgur.com/q9s5OKr.gif)',room)
+          }
+        }
       }
     });
   });
