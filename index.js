@@ -11,7 +11,7 @@ var gitter = new Gitter(config.gitter.token);
 var giphy = new Giphy(config.giphy.apikey);
 
 // gitter room name from config gets joined, to receive the room id on start
-rooms = ["Random","bot-spam-playground", "theodinproject","Ruby","Rails","HTML-CSS","Javascript"]
+rooms = ["Random","bot-spam-playground", "theodinproject","Ruby","Rails","HTML-CSS","Javascript","Git","Getting-Hired","Contributing-Activity","Code-Review","Contributing"]
 for (var i = 0; i < rooms.length; i++) {
   gitter.rooms.join( "TheOdinProject/" + rooms[i] , function(err, room) {
     if (err) {
