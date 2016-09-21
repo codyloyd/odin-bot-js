@@ -45,7 +45,7 @@ function listenToMessages () {
           search = search.replace(/_|:/g, ' ').trim();
           // if there is search text, search after it
           if (search) {
-            if (parseInt(Math.random()*20) == 0) {
+            if (parseInt(Math.random()*30) == 0) {
               search = "pasta"
             }
             giphy.search({q: search, limit: 20}, function (err, result, res) {
