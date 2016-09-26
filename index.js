@@ -131,11 +131,7 @@ function listenToMessages () {
                 send("##leaderboard [![partytime](http://cultofthepartyparrot.com/parrots/parrot.gif)](http://cultofthepartyparrot.com/parrots/parrot.gif) \n" + usersList,room)
             }
           })
-        } else if (text.toLowerCase().match("windows")){
-          if (parseInt(Math.random()*6) == 0 && data.fromUser.username != "odin-bot") {
-            send('##did somebody say windows? \n\n![](http://i.imgur.com/q9s5OKr.gif)',room)
-          }
-        }
+        } 
       }
     });
   });
