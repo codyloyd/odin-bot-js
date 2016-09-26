@@ -3,7 +3,7 @@ var request = require('request');
 var Giphy = require('giphy');
 
 // get configuration infos from config.js file
-// if non available, copy config.example.js and fill out the 
+// if non available, copy config.example.js and fill out the
 var config = require('./config.js');
 var time = 0
 
@@ -15,26 +15,26 @@ rooms = ["Random","bot-spam-playground", "theodinproject","Ruby","Rails","HTML-C
 for (var i = 0; i < rooms.length; i++) {
   gitter.rooms.join( "TheOdinProject/" + rooms[i] , function(err, room) {
     if (err) {
-      console.log('Not possible to join the room: ', err);
+      console.log('Not possible to join the room: ' + rooms[i], err);
       return;
     }
     config.gitter.room.id = room.id;
     // start the message listener
     listenToMessages();
   })
-}  
+}
 
 function listenToMessages () {
   gitter.rooms.find(config.gitter.room.id).then(function(room) {
     var events = room.streaming().chatMessages();
-    // The 'snapshot' event is emitted once, with the last messages in the room 
+    // The 'snapshot' event is emitted once, with the last messages in the room
     events.on('snapshot', function(snapshot) {
       console.log(snapshot.length + ' messages in the snapshot');
     });
     // event gets called, when a new message gets written in the configured channel
     events.on('chatMessages', function(message) {
       // the bot only evaluates new messages, no updates or other changes
-      if (message.operation === 'create') {
+      if (message.operation === 'create' && message.model.fromUser.username != "odin-bot") {
         var data = message.model;
         var text = data.text;
         // text contains the giphy command
@@ -72,14 +72,14 @@ function listenToMessages () {
                   }
                 })
               }
-              
+
             });
           } else {
             // otherwise send an explanation to user
             var help = '@' + user + ': use `/giphy` with a word, to get a gif related to that word, eg. `/giphy cats hats`';
             send(help, room);
           }
-        // text contains the ++ command  
+        // text contains the ++ command
         } else if (text.match(config.pointsbot.regex)) {
           name = text.match(/@\S+\s?\+\+/)[0]
           name = name.replace("@","")
@@ -108,7 +108,7 @@ function listenToMessages () {
               send("Hmmm... I don't think I know `" + name + "`: did you spell it correctly?", room)
             })
           }
-        //text contains the leaderboard command  
+        //text contains the leaderboard command
         } else if (text.match("/leaderboard")){
           var time = elapsedTime()
           if (time > 108000) {
@@ -126,12 +126,17 @@ function listenToMessages () {
                 } else {
                   usersList +=  "  - " + users[i].name + " [" + users[i].points +  " points]\n"
                 }
-                
+
               }
                 send("##leaderboard [![partytime](http://cultofthepartyparrot.com/parrots/parrot.gif)](http://cultofthepartyparrot.com/parrots/parrot.gif) \n" + usersList,room)
             }
           })
-        } 
+        } else if (text.match("@odin-bot")||text.match("/help")) {
+          send("> Odin Bot Commands \n\n > - give points to someone who has been helpful by mentioning their name and adding ++ : `@username ++`\n\n > - view the points leaderboard with `/leaderboard`\n\n > - share a nice gif with your friends with `/giphy` and another word \n\n > - For help with gitter commands (and `code` syntax)press `ctl+shift+alt+m` \n\n> - say my name, or `/help` to view this message again \n\n > - if you have any complaints about the bot, message csrail it's all his fault :trollface:",room)
+        } else if (text.match("money")){
+          send("![](http://i.giphy.com/KJg6Znn4V1Jcs.gif)",room)
+          send("##money money money!", room)
+        }
       }
     });
   });
@@ -170,17 +175,17 @@ function requestUser (username, callback, errorcallback) {
 }
 
 function send (message, room) {
-  
+
   // switch, where the message should be sent
   switch (config.gitter.place) {
-    case 'activity':  
+    case 'activity':
       request.post(config.gitter.webhook).form({message: message});
       break;
-  
+
     case 'chat':
       room.send(message);
       break;
-  
+
     default:
       console.log(message);
       break;
