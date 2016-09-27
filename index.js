@@ -136,7 +136,7 @@ function listenToMessages () {
         } else if (text.match("money")){
           send("![](http://i.giphy.com/KJg6Znn4V1Jcs.gif)",room)
           send("##money money money!", room)
-        } else if (text.toLowerCase()match("windows")) {
+        } else if (text.toLowerCase().match("windows")) {
           if (parseInt(Math.random()*10) == 0){
             send("![](http://i.imgur.com/q9s5OKr.gif)", room)
             send("##did I hear someone say something about WINDOWS?",room)
