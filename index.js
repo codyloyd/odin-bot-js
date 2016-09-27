@@ -132,7 +132,7 @@ function listenToMessages () {
             }
           })
         } else if (text.match("@odin-bot")||text.match("/help")) {
-          send("> Odin Bot Commands \n\n > - give points to someone who has been helpful by mentioning their name and adding ++ : `@username ++`\n\n > - view the points leaderboard with `/leaderboard`\n\n > - share a nice gif with your friends with `/giphy` and another word \n\n > - For help with gitter commands (and `code` syntax)press `ctl+shift+alt+m` \n\n> - say my name, or `/help` to view this message again \n\n > - if you have any complaints about the bot, message csrail it's all his fault :trollface:",room)
+          send("> Odin Bot Commands \n\n > - give points to someone who has been helpful by mentioning their name and adding ++ : `@username ++`\n\n > - view the points leaderboard with `/leaderboard`\n\n > - share a nice gif with your friends with `/giphy` and another word \n\n > - For help with gitter commands (and `code` syntax)press `ctl+shift+alt+m` \n\n> - say my name, or `/help` to view this message again \n\n > - if you have any complaints about the bot, message " + randomMod() + ":trollface:",room)
         } else if (text.match("money")){
           send("![](http://i.giphy.com/KJg6Znn4V1Jcs.gif)",room)
           send("##money money money!", room)
@@ -140,6 +140,13 @@ function listenToMessages () {
       }
     });
   });
+}
+
+var counter = 0
+function randomMod(){
+  var mods = ["Kevin, he's the boss around here anyway.","csrail, it's all his fault","Jimmie... just cause","Chris (praise be)","anyone but cody... seriously he doesn't have anything to do with this."]
+  counter += 1
+  return mods[counter % mods.length]
 }
 
 //record time of event
