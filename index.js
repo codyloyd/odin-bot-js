@@ -57,7 +57,7 @@ function listenToMessages () {
                 send(feedcontent, room);
                 if (search == "randy savage") {
                   setTimeout(function(){
-                    send("SAVAGE :trollface:", room)
+                    send("SAVAAAGE :trollface:", room)
                   }, 6000)
                 }
               } else {
