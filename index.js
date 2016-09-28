@@ -45,8 +45,8 @@ function listenToMessages () {
           search = search.replace(/_|:/g, ' ').trim();
           // if there is search text, search after it
           if (search) {
-            if (parseInt(Math.random()*30) == 0) {
-              search = "pasta"
+            if (parseInt(Math.random()*20) == 0) {
+              search = "randy savage"
             }
             giphy.search({q: search, limit: 20}, function (err, result, res) {
               // if there are results, send a random one
@@ -57,7 +57,7 @@ function listenToMessages () {
                 send(feedcontent, room);
                 if (search == "pasta") {
                   setTimeout(function(){
-                    send("PAAASTAAA :trollface:", room)
+                    send("SAVAGE :trollface:", room)
                   }, 6000)
                 }
               } else {
