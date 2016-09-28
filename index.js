@@ -55,7 +55,7 @@ function listenToMessages () {
                 var imgurl = image.images.original.url;
                 var feedcontent =  '@' + user + ' : __'+ search +'__ \n\n[!['+search+'](' + imgurl + ')](' + image.url + ')';
                 send(feedcontent, room);
-                if (search == "pasta") {
+                if (search == "randy savage") {
                   setTimeout(function(){
                     send("SAVAGE :trollface:", room)
                   }, 6000)
