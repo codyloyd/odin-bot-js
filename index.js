@@ -133,14 +133,13 @@ function listenToMessages () {
           })
         } else if (text.match("@odin-bot")||text.match("/help")) {
           send("> Odin Bot Commands \n\n > - give points to someone who has been helpful by mentioning their name and adding ++ : `@username ++`\n\n > - view the points leaderboard with `/leaderboard`\n\n > - share a nice gif with your friends with `/giphy` and another word \n\n > - For help with gitter commands (and `code` syntax)press `ctl+shift+alt+m` \n\n> - say my name, or `/help` to view this message again \n\n > - if you have any complaints about the bot, message " + randomMod() + ":trollface:",room)
-        } else if (text.match("flex")){
-          send("![](http://i.giphy.com/l3nWkgzQWq0bXCqTC.gif)",room)
-          send("##FLEX-box! amirite??!!??", room)
         } else if (text.toLowerCase().match("windows")) {
           if (parseInt(Math.random()*10) == 0){
             send("![](http://i.imgur.com/q9s5OKr.gif)", room)
             send("##did I hear someone say something about WINDOWS?",room)
           }
+        } else if (text.match("cody")){
+          send("![](http://i.giphy.com/l3nWkgzQWq0bXCqTC.gif)",room)
         }
       }
     });
