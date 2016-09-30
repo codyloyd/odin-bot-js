@@ -11,6 +11,8 @@ var config = {
       name: 'TheOdinProject/bot-spam-playground'
     },
 
+    rooms: ["Random","bot-spam-playground", "theodinproject","Ruby","Rails","HTML-CSS","Javascript","Git","Getting-Hired","Contributing-Activity","Code-Review","Contributing"],
+
     // custom webhook to send the gifs to the activity feed
     webhook: 'https://webhooks.gitter.im/e/ca75b94537a0fb91d19f',
 
