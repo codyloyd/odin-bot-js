@@ -11,8 +11,10 @@ var gitter = new Gitter(config.gitter.token);
 var giphy = new Giphy(config.giphy.apikey);
 
 // gitter room name from config gets joined, to receive the room id on start
-rooms = ["Random","bot-spam-playground", "theodinproject","Ruby","Rails","HTML-CSS","Javascript","Git","Getting-Hired","Contributing-Activity","Code-Review","Contributing"]
+var rooms = config.gitter.rooms
+console.log(rooms)
 for (var i = 0; i < rooms.length; i++) {
+  console.log(rooms[i])
   gitter.rooms.join( "TheOdinProject/" + rooms[i] , function(err, room) {
     if (err) {
       console.log('Not possible to join the room: ' + rooms[i], err);
@@ -138,8 +140,9 @@ function listenToMessages () {
             send("![](http://i.imgur.com/q9s5OKr.gif)", room)
             send("##did I hear someone say something about WINDOWS?",room)
           }
-        } else if (text.match("cody")){
-          send("![](http://i.giphy.com/l3nWkgzQWq0bXCqTC.gif)",room)
+        } else if (text.match("food")){
+          send("hungry? How about some PIZZA")
+          send("![](http://i.giphy.com/yoJC2EyuKmTUgjlTgY.gif)",room)
         }
       }
     });
