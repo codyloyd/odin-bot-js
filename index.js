@@ -143,6 +143,20 @@ function listenToMessages () {
         } else if (text.match("food")){
           send("hungry? How about some PIZZA")
           send("![](http://i.giphy.com/yoJC2EyuKmTUgjlTgY.gif)",room)
+        } else if (text.toLowerCase().match("recursion") || text.toLowerCase().match("recursive")) {
+          send("did someone say something about _recursion?_", room)
+          setTimeout(function(){
+            send("did someone say something about _recursion?_", room)
+          }, 2000)
+          setTimeout(function(){
+            send("did someone say something about _recursion?_", room)
+          }, 5000)
+          setTimeout(function(){
+            send("did someone say something about _recursion?_", room)
+          }, 8000)
+          setTimeout(function(){
+            send(":trollface:", room)
+          }, 12000)
         }
       }
     });
