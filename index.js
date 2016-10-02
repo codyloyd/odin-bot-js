@@ -154,7 +154,7 @@ function listenToMessages () {
               send("did someone say something about _recursion?_", room)
             }, 8000)
             setTimeout(function(){
-              send(":trollface:", room)
+              send("hehe.. just joking :trollface:", room)
             }, 12000)
           } else {
             send("OK... I think we've had enough of that joke for now",room)
