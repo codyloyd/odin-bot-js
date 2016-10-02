@@ -12,12 +12,9 @@ var giphy = new Giphy(config.giphy.apikey);
 
 // gitter room name from config gets joined, to receive the room id on start
 var rooms = config.gitter.rooms
-console.log(rooms)
 for (var i = 0; i < rooms.length; i++) {
-  console.log(rooms[i])
   gitter.rooms.join( "TheOdinProject/" + rooms[i] , function(err, room) {
     if (err) {
-      console.log('Not possible to join the room: ' + rooms[i], err);
       return;
     }
     config.gitter.room.id = room.id;
@@ -144,19 +141,24 @@ function listenToMessages () {
           send("hungry? How about some PIZZA")
           send("![](http://i.giphy.com/yoJC2EyuKmTUgjlTgY.gif)",room)
         } else if (text.toLowerCase().match("recursion") || text.toLowerCase().match("recursive")) {
-          send("did someone say something about _recursion?_", room)
-          setTimeout(function(){
+          var time = elapsedTime()
+          if (time > 108000) {
             send("did someone say something about _recursion?_", room)
-          }, 2000)
-          setTimeout(function(){
-            send("did someone say something about _recursion?_", room)
-          }, 5000)
-          setTimeout(function(){
-            send("did someone say something about _recursion?_", room)
-          }, 8000)
-          setTimeout(function(){
-            send(":trollface:", room)
-          }, 12000)
+            setTimeout(function(){
+              send("did someone say something about _recursion?_", room)
+            }, 2000)
+            setTimeout(function(){
+              send("did someone say something about _recursion?_", room)
+            }, 5000)
+            setTimeout(function(){
+              send("did someone say something about _recursion?_", room)
+            }, 8000)
+            setTimeout(function(){
+              send(":trollface:", room)
+            }, 12000)
+          } else {
+            send("OK... I think we've had enough of that joke for now",room)
+          }
         }
       }
     });
@@ -165,7 +167,7 @@ function listenToMessages () {
 
 var counter = 0
 function randomMod(){
-  var mods = ["Kevin, he's the boss around here anyway.","csrail, it's all his fault","Jimmie... just cause","Chris (praise be)","anyone but cody... seriously he doesn't have anything to do with this."]
+  var mods = ["Kevin, he's the boss around here anyway.","csrail, it's all his fault","Jimmie... just cause","anyone but cody... seriously he doesn't have anything to do with this."]
   counter += 1
   return mods[counter % mods.length]
 }
