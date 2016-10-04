@@ -132,6 +132,10 @@ function listenToMessages () {
           })
         } else if (text.match("@odin-bot")||text.match("/help")) {
           send("> Odin Bot Commands \n\n > - give points to someone who has been helpful by mentioning their name and adding ++ : `@username ++`\n\n > - view the points leaderboard with `/leaderboard`\n\n> - To view or join the rest of the Odin chatrooms click [HERE](https://gitter.im/orgs/TheOdinProject/rooms). \n\n > - share a nice gif with your friends with `/giphy` and another word \n\n > - For help with gitter commands (and `code` syntax)press `ctl+shift+alt+m` \n\n> - say my name, or `/help` to view this message again \n\n> - if you have any complaints about the bot, message " + randomMod() + ":trollface:",room)
+        } else if (text.match("partyparrot") || text.match("party_parrot")){
+          var parrots = ["http://cultofthepartyparrot.com/parrots/parrot.gif","http://cultofthepartyparrot.com/parrots/shuffleparrot.gif","http://cultofthepartyparrot.com/parrots/parrotcop.gif","http://cultofthepartyparrot.com/parrots/parrotdad.gif","http://cultofthepartyparrot.com/parrots/fiestaparrot.gif","http://cultofthepartyparrot.com/parrots/explodyparrot.gif","http://cultofthepartyparrot.com/parrots/aussieparrot.gif"]
+          var index = randomInt(parrots.length)
+          send("![](" + parrots[index] + ")",room)
         } else if (text.toLowerCase().match("windows")) {
           if (parseInt(Math.random()*10) == 0){
             send("![](http://i.imgur.com/q9s5OKr.gif)", room)
@@ -171,7 +175,9 @@ function randomMod(){
   counter += 1
   return mods[counter % mods.length]
 }
-
+function randomInt(range) {
+  return parseInt(Math.random()*range)
+}
 //record time of event
 function getTime () {
   return new Date().getTime()
