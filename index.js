@@ -138,7 +138,7 @@ function listenToMessages () {
             send("##did I hear someone say something about WINDOWS?",room)
           }
         } else if (text.match("food")){
-          send("hungry? How about some PIZZA")
+          send("hungry? How about some PIZZA",room)
           send("![](http://i.giphy.com/yoJC2EyuKmTUgjlTgY.gif)",room)
         } else if (text.toLowerCase().match("recursion") || text.toLowerCase().match("recursive")) {
           var time = elapsedTime()
