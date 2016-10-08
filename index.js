@@ -45,7 +45,7 @@ function listenToMessages () {
           // if there is search text, search after it
           if (search) {
             if (parseInt(Math.random()*20) == 0) {
-              search = "randy savage"
+              search = "rickroll"
             }
             giphy.search({q: search, limit: 20}, function (err, result, res) {
               // if there are results, send a random one
@@ -54,10 +54,13 @@ function listenToMessages () {
                 var imgurl = image.images.original.url;
                 var feedcontent =  '@' + user + ' : __'+ search +'__ \n\n[!['+search+'](' + imgurl + ')](' + image.url + ')';
                 send(feedcontent, room);
-                if (search == "randy savage") {
+                if (search == "rickroll") {
                   setTimeout(function(){
-                    send("SAVAAAGE :trollface:", room)
+                    send("NEVER GONNA GIVE YOU UP :trollface:", room)
                   }, 6000)
+                  setTimeout(function(){
+                    send("NEVER GONNA LET YOU DOOOOWWWWN :trollface:", room)
+                  }, 12000)
                 }
               } else {
                 // otherwise send a message, that there are no gifs with that search
