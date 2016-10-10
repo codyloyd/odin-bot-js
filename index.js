@@ -38,17 +38,17 @@ function listenToMessages () {
           botResponseGiphy(room,text,data)
         } else if (text.match(config.pointsbot.regex)) {
           botResponsePoints(room,text,data)
-        } else if (text.match("/leaderboard")){
+        } else if (text.match(/\/leaderboard/)){
           botResponseLeaderboard(room)
-        } else if (text.match("@odin-bot")||text.match("/help")) {
+        } else if (text.match(/@odin-bot|\/help/)) {
           botResponseHelp(room)
-        } else if (text.toLowerCase().match("partyparrot") || text.toLowerCase().match("party_parrot")){
+        } else if (text.toLowerCase().match(/partyparrot|party_parrot/)) {
           botResponsePartyParrot(room, text)
         }else if (text.toLowerCase().match("windows")) {
           botResponseWindows(room);
         } else if (text.match("food")){
           botResponseFood(room)
-        } else if (text.toLowerCase().match("recursion") || text.toLowerCase().match("recursive")) {
+        } else if (text.toLowerCase().match(/recursion|recursive/) {
           botResponseRecursion(room)
         }
       }
