@@ -6,12 +6,27 @@ var config = {
     token: process.env.GITTER_TOKEN,
 
 
-    room: {
-      // name of the gitter room, you want to retrieve and send the messages
-      name: 'TheOdinProject/bot-spam-playground'
-    },
+    // room: {
+    //   // name of the gitter room, you want to retrieve and send the messages
+    //   name: 'TheOdinProject/bot-spam-playground'
+    // },
 
-    rooms: ["Random","bot-spam-playground", "theodinproject","Ruby","Rails","HTML-CSS","Javascript","Git","Getting-Hired","Contributing-Activity","Code-Review","Contributing"],
+    rooms: [
+      "bot-spam-playground",
+      "Code-Review",
+      "Computer-Science",
+      "Contributing",
+      "ContributingActivtity",
+      "Getting-Hired",
+      "Git",
+      "HTML-CSS",
+      "Interesting-Stuff",
+      "Javascript",
+      "Rails",
+      "Random",
+      "Ruby",
+      "theodinproject"
+    ],
 
     // custom webhook to send the gifs to the activity feed
     webhook: 'https://webhooks.gitter.im/e/ca75b94537a0fb91d19f',

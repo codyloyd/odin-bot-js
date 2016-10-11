@@ -15,16 +15,18 @@ var time = 0
 var rooms = config.gitter.rooms
 //join all the rooms
 for (var i = 0; i < rooms.length; i++) {
-  gitter.rooms.join( "TheOdinProject/" + rooms[i] , function(err, room) {
-    if (err) {return;}
-    config.gitter.room.id = room.id;
-    // start the message listener
-    listenToMessages();
-  })
+  gitter.rooms.join( "TheOdinProject/" + rooms[i])
+    .then(function(room) {
+      console.log(`Joined room: ${room.name}`);
+      listenToMessages(room.id);
+    })
+    .fail(function(err){
+      console.log(`There was an error: ${err}`)
+    })
 }
 
-function listenToMessages () {
-  gitter.rooms.find(config.gitter.room.id).then(function(room) {
+function listenToMessages (roomId) {
+  gitter.rooms.find(roomId).then(function(room) {
     var events = room.streaming().chatMessages();
     //I"m not sure what this does.... commenting it out to see what happens
     // events.on('snapshot', function(snapshot) {
@@ -34,15 +36,15 @@ function listenToMessages () {
       //make sure the message is a 'create' message and that it's not "from" the bot
       //can't have him calling himself!
       if (message.operation === 'create' && message.model.fromUser.username != "odin-bot") {
-        var data = message.model;
-        var text = data.text;
+        // var data = message.model;
+        // var text = data.text;
         var messageData = {
           data: message.model,
           text: message.model.text,
           room: room
         }
         for (var i in botFunctions) {
-          if (text.match(botFunctions[i].condition)){
+          if (messageData.text.match(botFunctions[i].condition)){
             botFunctions[i].response(messageData)
           }
         }
@@ -83,7 +85,15 @@ var botFunctions = {
   recursion: {
     condition: /recursion|recursive/,
     response: botResponseRecursion
+  },
+  hello: {
+    condition: /hello odin-bot|hello bot|hi odin-bot|hi bot/,
+    response: botResponseHello
   }
+}
+
+function botResponseHello(messageData){
+  send(`oh hi there ${messageData.data.fromUser.displayName}`, messageData.room)
 }
 
 function botResponseGiphy(messageData){
