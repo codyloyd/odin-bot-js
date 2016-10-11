@@ -181,7 +181,7 @@ function botResponseLeaderboard(messageData){
       for (var i = 0; i < looplength; i++) {
         if (i == 0) {
           // usersList +=  "  - " + users[i].name + " [" + users[i].points + " points] :tada: \n"
-          usersList += ` - ${users[i].name} [${users[i].points} points] :tada \n`
+          usersList += ` - ${users[i].name} [${users[i].points} points] :tada: \n`
         } else {
           usersList +=  ` - ${users[i].name} [${users[i].points} points] \n`
         }
