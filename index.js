@@ -1,23 +1,22 @@
-var Gitter = require('node-gitter');
-var request = require('request');
-var Giphy = require('giphy');
-
-// get configuration infos from config.js file
-// if non available, copy config.example.js and fill out the
 var config = require('./config.js');
-var time = 0
 
+var Gitter = require('node-gitter');
 var gitter = new Gitter(config.gitter.token);
+
+var Giphy = require('giphy');
 var giphy = new Giphy(config.giphy.apikey);
+
+var request = require('request');
+
+
+var time = 0
 
 // gitter room name from config gets joined, to receive the room id on start
 var rooms = config.gitter.rooms
 //join all the rooms
 for (var i = 0; i < rooms.length; i++) {
   gitter.rooms.join( "TheOdinProject/" + rooms[i] , function(err, room) {
-    if (err) {
-      return;
-    }
+    if (err) {return;}
     config.gitter.room.id = room.id;
     // start the message listener
     listenToMessages();
@@ -27,38 +26,72 @@ for (var i = 0; i < rooms.length; i++) {
 function listenToMessages () {
   gitter.rooms.find(config.gitter.room.id).then(function(room) {
     var events = room.streaming().chatMessages();
-    events.on('snapshot', function(snapshot) {
-      console.log(snapshot.length + ' messages in the snapshot');
-    });
+    //I"m not sure what this does.... commenting it out to see what happens
+    // events.on('snapshot', function(snapshot) {
+    //   console.log(snapshot.length + ' messages in the snapshot');
+    // });
     events.on('chatMessages', function(message) {
+      //make sure the message is a 'create' message and that it's not "from" the bot
+      //can't have him calling himself!
       if (message.operation === 'create' && message.model.fromUser.username != "odin-bot") {
         var data = message.model;
         var text = data.text;
-        if (text.match(config.giphy.regex)) {
-          botResponseGiphy(room,text,data)
-        } else if (text.match(config.pointsbot.regex)) {
-          botResponsePoints(room,text,data)
-        } else if (text.match(/\/leaderboard/)){
-          botResponseLeaderboard(room)
-        } else if (text.match(/@odin-bot|\/help/)) {
-          botResponseHelp(room)
-        } else if (text.toLowerCase().match(/partyparrot|party_parrot/)) {
-          botResponsePartyParrot(room, text)
-        }else if (text.toLowerCase().match("windows")) {
-          botResponseWindows(room);
-        } else if (text.match("food")){
-          botResponseFood(room)
-        } else if (text.toLowerCase().match(/recursion|recursive/) {
-          botResponseRecursion(room)
+        var messageData = {
+          data: message.model,
+          text: message.model.text,
+          room: room
+        }
+        for (var i in botFunctions) {
+          if (text.match(botFunctions[i].condition)){
+            botFunctions[i].response(messageData)
+          }
         }
       }
     });
   });
 }
 
-function botResponseGiphy(room,text,data){
+var botFunctions = {
+  giphy: {
+    condition: /^\/giphy/,
+    response: botResponseGiphy
+  },
+  pointsbot: {
+    condition: /@\S+\s?\+\+/,
+    response: botResponsePoints
+  },
+  leaderboard: {
+    condition: /^\/leaderboard/,
+    response: botResponseLeaderboard
+  },
+  help: {
+    condition: /^\/help/,
+    response: botResponseHelp
+  },
+  partyparrot: {
+    condition: /partyparrot|party_parrot|party parrot/,
+    response: botResponsePartyParrot
+  },
+  windows: {
+    condition: /windows/,
+    response: botResponseWindows
+  },
+  food: {
+    condition: /food|hungry|dinner|breakfast|lunch|pizza/,
+    response: botResponseFood
+  },
+  recursion: {
+    condition: /recursion|recursive/,
+    response: botResponseRecursion
+  }
+}
+
+function botResponseGiphy(messageData){
+  var data = messageData.data;
+  var text = messageData.text;
+  var room = messageData.room;
   var user = data.fromUser.username;
-  var search = text.replace(config.giphy.regex, '');
+  var search = text.replace(botFunctions.giphy.condition, '');
   // replace underscores and colons to spaces because emojis
   search = search.replace(/_|:/g, ' ').trim();
   // if there is search text, search after it
@@ -101,7 +134,10 @@ function botResponseGiphy(room,text,data){
     send(help, room);
   }
 }
-function botResponsePoints(room,text,data) {
+function botResponsePoints(messageData) {
+  var room = messageData.room;
+  var text = messageData.text;
+  var data = messageData.data;
   name = text.match(/@\S+\s?\+\+/)[0]
   name = name.replace("@","")
   name = name.replace("++","")
@@ -130,7 +166,8 @@ function botResponsePoints(room,text,data) {
     })
   }
 }
-function botResponseLeaderboard(room){
+function botResponseLeaderboard(messageData){
+  var room = messageData.room;
   // var time = elapsedTime()
   // if (time > 108000) {
     send("calculating points....",room)
@@ -154,7 +191,7 @@ function botResponseLeaderboard(room){
     }
   })
 }
-function botResponseHelp(room) {
+function botResponseHelp(messageData) {
   send(`> Odin Bot Commands
     > - give points to someone who has been helpful by mentioning their name and adding ++ : \`@username ++\`
     > - view the points leaderboard with \`/leaderboard\`
@@ -162,14 +199,16 @@ function botResponseHelp(room) {
     > - share a nice gif with your friends with \`/giphy\` and another word
     > - For help with gitter commands (and \`code\` syntax)press \`ctl+shift+alt+m\`
     > - say my name, or \`/help\` to view this message again
-    > - if you have any complaints about the bot, message ${randomMod()} :trollface:`,room)
+    > - if you have any complaints about the bot, message ${randomMod()} :trollface:`,messageData.room)
 }
-function botResponsePartyParrot(room, text){
+function botResponsePartyParrot(messageData){
+  var room = messageData.room;
+  var text = messageData.text;
   var parrots = [
+    "http://cultofthepartyparrot.com/parrots/parrotdad.gif",
     "http://cultofthepartyparrot.com/parrots/parrot.gif",
     "http://cultofthepartyparrot.com/parrots/shuffleparrot.gif",
     "http://cultofthepartyparrot.com/parrots/parrotcop.gif",
-    "http://cultofthepartyparrot.com/parrots/parrotdad.gif",
     "http://cultofthepartyparrot.com/parrots/fiestaparrot.gif",
     "http://cultofthepartyparrot.com/parrots/explodyparrot.gif",
     "http://cultofthepartyparrot.com/parrots/aussieparrot.gif"
@@ -180,22 +219,27 @@ function botResponsePartyParrot(room, text){
 
     send(`![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})`,room)
 
+  } else if (text.toLowerCase().match("!")) {
+    send(`![](${parrots[0]})`,room)
   } else {
     var index = randomInt(parrots.length)
     send(`![]( ${parrots[index]} )`,room)
   }
 }
-function botResponseWindows(room){
+function botResponseWindows(messageData){
+  var room = messageData.room;
   if (parseInt(Math.random()*10) == 0){
     send("![](http://i.imgur.com/q9s5OKr.gif)", room)
     send("##did I hear someone say something about WINDOWS?",room)
   }
 }
-function botResponseFood(room) {
-  send("hungry? How about some PIZZA",room)
-  send("![](http://i.giphy.com/yoJC2EyuKmTUgjlTgY.gif)",room)
+function botResponseFood(messageData) {
+  var room = messageData.room;
+  send("hungry? How about some PIZZA",room);
+  send("![](http://i.giphy.com/yoJC2EyuKmTUgjlTgY.gif)",room);
 }
-function botResponseRecursion(room) {
+function botResponseRecursion(messageData) {
+  var room = messageData.room;
   var time = elapsedTime()
   if (time > 108000) {
     send("did someone say something about _recursion?_", room)
@@ -217,6 +261,7 @@ function botResponseRecursion(room) {
 }
 
 var counter = 0
+
 function randomMod(){
   var mods = ["Kevin, he's the boss around here anyway.","csrail, it's all his fault","Jimmie... just cause","anyone but cody... seriously he doesn't have anything to do with this."]
   counter += 1
