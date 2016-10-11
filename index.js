@@ -148,32 +148,46 @@ function botResponsePoints(messageData) {
   var room = messageData.room;
   var text = messageData.text;
   var data = messageData.data;
-  name = text.match(/@\S+\s?\+\+/)[0]
-  name = name.replace("@","")
-  name = name.replace("++","")
-  name = name.replace(" ", "")
   var user = data.fromUser.username
-  if (name.toLowerCase() == user.toLowerCase()) {
-    send("![](http://media0.giphy.com/media/RddAJiGxTPQFa/200.gif)", room)
-    send("You can't do that!", room)
-  } else if ( name == "odin-bot" ){
-    send("awwwww shucks... :heart_eyes:",room)
-  } else  {
-    var time = elapsedTime()
-    if (time > 108000) {
-      send("calculating points....",room)
+  var names = []
+  getNamesFromText(text)
+
+  for (var i in names) {
+    addPointsToUser(names[i])
+  }
+
+  function getNamesFromText(text){
+    name = text.match(/@\S+\s?\+\+/)[0]
+    text = text.replace(name,'')
+    name = name.replace("@","").replace("++","").replace(" ", "")
+    names.push(name)
+    if (text.match(/@\S+\s?\+\+/)){
+      getNamesFromText(text)
     }
-    requestUser(name, function(result){
-      request('https://odin-points-bot.herokuapp.com/search/' + result.username + "?access_token=" + config.pointsbot.token, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-          var userJson = JSON.parse(body)
-          var points = pointsPluralizer(userJson.points)
-          send("Sweet! @" + userJson.name + " now has " + userJson.points + " " + points ,room)
-        }
+  }
+  function addPointsToUser(name) {
+    if (name.toLowerCase() == user.toLowerCase()) {
+      send("![](http://media0.giphy.com/media/RddAJiGxTPQFa/200.gif)", room)
+      send("You can't do that!", room)
+    } else if ( name == "odin-bot" ){
+      send("awwwww shucks... :heart_eyes:",room)
+    } else  {
+      var time = elapsedTime()
+      if (time > 108000) {
+        send("calculating points....",room)
+      }
+      requestUser(name, function(result){
+        request(`https://odin-points-bot.herokuapp.com/search/${result.username}?access_token=${config.pointsbot.token}`, function (error, response, body) {
+          if (!error && response.statusCode == 200) {
+            var userJson = JSON.parse(body)
+            var points = pointsPluralizer(userJson.points)
+            send(`Sweet! @${userJson.name} now has ${userJson.points} points` ,room)
+          }
+        })
+      }, function(){
+        send(`Hmmm... I don't think I know \`${name}\`: did you spell it correctly?`, room)
       })
-    }, function(){
-      send("Hmmm... I don't think I know `" + name + "`: did you spell it correctly?", room)
-    })
+    }
   }
 }
 function botResponseLeaderboard(messageData){
@@ -304,7 +318,7 @@ function requestUser (username, callback, errorcallback) {
   request({url: "https://api.gitter.im/v1/user?q=" + username, headers: {Authorization: "Bearer " + config.gitter.token}}, function (error, response, body){
     if (!error && response.statusCode == 200) {
       var user = JSON.parse(body).results[0]
-      if (user) {
+      if (user && user.username.toLowerCase() == username.toLowerCase()) {
         callback(user)
       } else {
         errorcallback()
