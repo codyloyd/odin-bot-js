@@ -82,10 +82,6 @@ var botFunctions = {
     condition: /food|hungry|dinner|breakfast|lunch|pizza/,
     response: botResponseFood
   },
-  recursion: {
-    condition: /recursion|recursive/,
-    response: botResponseRecursion
-  },
   hello: {
     condition: /hello odin-bot|hello bot|hi odin-bot|hi bot/,
     response: botResponseHello
@@ -179,7 +175,7 @@ function botResponsePoints(messageData) {
       send("awwwww shucks... :heart_eyes:",room)
     } else  {
       var time = elapsedTime()
-      if (time > 108000) {
+      if (time > 988000) {
         send("calculating points....",room)
       }
       requestUser(name, function(result){
@@ -267,27 +263,6 @@ function botResponseFood(messageData) {
   var room = messageData.room;
   send("hungry? How about some PIZZA",room);
   send("![](http://i.giphy.com/yoJC2EyuKmTUgjlTgY.gif)",room);
-}
-function botResponseRecursion(messageData) {
-  var room = messageData.room;
-  var time = elapsedTime()
-  if (time > 108000) {
-    send("did someone say something about _recursion?_", room)
-    setTimeout(function(){
-      send("did someone say something about _recursion?_", room)
-    }, 2000)
-    setTimeout(function(){
-      send("did someone say something about _recursion?_", room)
-    }, 5000)
-    setTimeout(function(){
-      send("did someone say something about _recursion?_", room)
-    }, 8000)
-    setTimeout(function(){
-      send("hehe.. just joking :trollface:", room)
-    }, 12000)
-  } else {
-    send("OK... I think we've had enough of that joke for now",room)
-  }
 }
 
 var counter = 0
