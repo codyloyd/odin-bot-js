@@ -209,7 +209,7 @@ function botResponseLeaderboard(messageData){
         } else {
           usersList +=  ` - ${users[i].name} [${users[i].points} points] \n`
         }
-
+        usersList += ` - see the full leaderboard [here](https://odin-bot.github.io) \n`
       }
         send("##leaderboard [![partytime](http://cultofthepartyparrot.com/parrots/parrot.gif)](http://cultofthepartyparrot.com/parrots/parrot.gif) \n" + usersList,room)
     }
