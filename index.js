@@ -89,13 +89,19 @@ var botFunctions = {
   hello: {
     condition: /hello odin-bot|hello bot|hi odin-bot|hi bot/,
     response: botResponseHello
+  },
+  hug: {
+    condition: /\/hug/,
+    response: botResponseHug
   }
 }
 
+function botResponseHug(messageData){
+  send(`⊂(´・ω・｀⊂)`,messageData.room)
+}
 function botResponseHello(messageData){
   send(`oh hi there ${messageData.data.fromUser.displayName}`, messageData.room)
 }
-
 function botResponseGiphy(messageData){
   var data = messageData.data;
   var text = messageData.text;
