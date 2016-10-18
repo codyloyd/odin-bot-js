@@ -22,6 +22,7 @@ var config = {
       "HTML-CSS",
       "Interesting-Stuff",
       "Javascript",
+      "ModTeam",
       "Rails",
       "Random",
       "Ruby",
