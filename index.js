@@ -173,9 +173,11 @@ function botResponsePoints(messageData) {
     } else if (points < 25) {
       return "Sweet!"
     } else if (points < 99) {
-      return "Super-Helper" 
-    } else {
+      return "Woot!" 
+    } else if (points < 105){
       return "HOLY CRAP!!"
+    } else {
+      return "Woot!"
     }
   }
   function addPointsToUser(name) {
