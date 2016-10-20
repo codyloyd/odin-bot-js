@@ -167,6 +167,17 @@ function botResponsePoints(messageData) {
       getNamesFromText(text)
     }
   }
+  function exclamation(points) {
+    if (points < 5) {
+      return "Nice!"
+    } else if (points < 25) {
+      return "Sweet!"
+    } else if (points < 99) {
+      return "Super-Helper" 
+    } else {
+      return "HOLY CRAP!!"
+    }
+  }
   function addPointsToUser(name) {
     if (name.toLowerCase() == user.toLowerCase()) {
       send("![](http://media0.giphy.com/media/RddAJiGxTPQFa/200.gif)", room)
@@ -183,7 +194,7 @@ function botResponsePoints(messageData) {
           if (!error && response.statusCode == 200) {
             var userJson = JSON.parse(body)
             var points = pointsPluralizer(userJson.points)
-            send(`Sweet! @${userJson.name} now has ${userJson.points} points` ,room)
+            send(`${exclamation(points)} @${userJson.name} now has ${userJson.points} points` ,room)
           }
         })
       }, function(){
