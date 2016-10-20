@@ -194,7 +194,7 @@ function botResponsePoints(messageData) {
           if (!error && response.statusCode == 200) {
             var userJson = JSON.parse(body)
             var points = pointsPluralizer(userJson.points)
-            send(`${exclamation(userJson.points)} @${userJson.name} now has ${userJson.points} points` ,room)
+            send(`${exclamation(points)} @${userJson.name} now has ${userJson.points} points` ,room)
           }
         })
       }, function(){
