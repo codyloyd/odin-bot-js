@@ -82,12 +82,19 @@ var botFunctions = {
     condition: /hello odin-bot|hello bot|hi odin-bot|hi bot/,
     response: botResponseHello
   },
+  gandalf: {
+    condition: /\/gandalf/,
+    response: botResponseGandalf
+  },
   hug: {
     condition: /\/hug/,
     response: botResponseHug
   }
 }
 
+function botResponseGandalf(messageData){
+  send(`[![](http://emojis.slackmojis.com/emojis/images/1450458362/181/gandalf.gif)](http://giphy.com/gifs/B3hcUhLX3BFHa/tile)`,messageData.room)
+}
 function botResponseHug(messageData){
   send(`⊂(´・ω・｀⊂)`,messageData.room)
 }
