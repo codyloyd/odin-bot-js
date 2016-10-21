@@ -78,10 +78,6 @@ var botFunctions = {
     condition: /windows/,
     response: botResponseWindows
   },
-  food: {
-    condition: /food|hungry|dinner|breakfast|lunch|pizza/,
-    response: botResponseFood
-  },
   hello: {
     condition: /hello odin-bot|hello bot|hi odin-bot|hi bot/,
     response: botResponseHello
@@ -271,12 +267,6 @@ function botResponseWindows(messageData){
     send("![](http://i.imgur.com/q9s5OKr.gif)", room)
     send("##did I hear someone say something about WINDOWS?",room)
   }
-}
-function botResponseFood(messageData) {
-  var room = messageData.room;
-  send("hungry? How about some PIZZA",room);
-  send("![](http://i.giphy.com/yoJC2EyuKmTUgjlTgY.gif)",room);
-}
 
 var counter = 0
 
