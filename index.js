@@ -267,6 +267,8 @@ function botResponseWindows(messageData){
     send("![](http://i.imgur.com/q9s5OKr.gif)", room)
     send("##did I hear someone say something about WINDOWS?",room)
   }
+}
+
 
 var counter = 0
 
