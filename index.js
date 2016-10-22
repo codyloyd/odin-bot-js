@@ -44,7 +44,7 @@ function listenToMessages (roomId) {
           room: room
         }
         for (var i in botFunctions) {
-          if (messageData.text.match(botFunctions[i].condition)){
+          if (messageData.text.toLowerCase().match(botFunctions[i].condition)){
             botFunctions[i].response(messageData)
           }
         }
