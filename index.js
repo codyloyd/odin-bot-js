@@ -253,7 +253,9 @@ function botResponsePartyParrot(messageData){
     "http://cultofthepartyparrot.com/parrots/parrotcop.gif",
     "http://cultofthepartyparrot.com/parrots/fiestaparrot.gif",
     "http://cultofthepartyparrot.com/parrots/explodyparrot.gif",
-    "http://cultofthepartyparrot.com/parrots/aussieparrot.gif"
+    "http://cultofthepartyparrot.com/parrots/aussieparrot.gif",
+    "http://emojis.slackmojis.com/emojis/images/1450738632/246/leftshark.png",
+    "http://emojis.slackmojis.com/emojis/images/1472757675/1132/otter-dance.gif"
   ]
 
   if (text.toLowerCase().match("   p")) {
