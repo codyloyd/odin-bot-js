@@ -26,7 +26,7 @@ var inspectString = function(string){
   var translation = false
   arrayOfWords.forEach(function (word) {
     for (var i = 1; i < 26; i++) {
-      if (words.includes(caesar(word.toLowerCase(),i))) {
+      if (words.indexOf(caesar(word.toLowerCase(),i)) > 0) {
         translation = caesar(string,(i))
       }
     }
