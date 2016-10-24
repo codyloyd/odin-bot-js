@@ -75,7 +75,6 @@ var words = [
 'their',
 'what',
 'so',
-'up',
 'out',
 'if',
 'about',
