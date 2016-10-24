@@ -8,6 +8,7 @@ var giphy = new Giphy(config.giphy.apikey);
 
 var request = require('request');
 
+var caesar = require('./caesar')
 
 var time = 0
 
@@ -43,6 +44,11 @@ function listenToMessages (roomId) {
           text: message.model.text,
           room: room
         }
+        var caesaredText = caesar(messageData.text,"X")
+        if (caesaredText) {
+          send(`translated text: ${caesaredText}`, messageData.room)
+        }
+
         for (var i in botFunctions) {
           if (messageData.text.toLowerCase().match(botFunctions[i].condition)){
             botFunctions[i].response(messageData)
@@ -90,6 +96,14 @@ var botFunctions = {
     condition: /\/hug/,
     response: botResponseHug
   }
+}
+
+function botResponseCaesar(messageData){
+  var text = messageData.text;
+  text = text.replace(botFunctions.caesar.condition, "")
+  var key = parseInt(text.match(/\(-?\d+\)/)[0].replace("(","").replace(")",""))
+  text = text.replace(/\(-?\d+\)/,"")
+  send(`Translated Message: ${caesar(text,key)}`,messageData.room)
 }
 
 function botResponseGandalf(messageData){
