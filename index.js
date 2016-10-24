@@ -44,10 +44,11 @@ function listenToMessages (roomId) {
           text: message.model.text,
           room: room
         }
-        var caesaredText = caesar(messageData.text,"X")
-        if (caesaredText) {
-          send(`translated text: ${caesaredText}`, messageData.room)
-        }
+        // HERE LIES THe Foolish CAESAR CIPHER THING, which got annoying fast.
+        // var caesaredText = caesar(messageData.text,"X")
+        // if (caesaredText) {
+        //   send(`translated text: ${caesaredText}`, messageData.room)
+        // }
 
         for (var i in botFunctions) {
           if (messageData.text.toLowerCase().match(botFunctions[i].condition)){
