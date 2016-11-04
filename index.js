@@ -29,26 +29,16 @@ for (var i = 0; i < rooms.length; i++) {
 function listenToMessages (roomId) {
   gitter.rooms.find(roomId).then(function(room) {
     var events = room.streaming().chatMessages();
-    //I"m not sure what this does.... commenting it out to see what happens
-    // events.on('snapshot', function(snapshot) {
-    //   console.log(snapshot.length + ' messages in the snapshot');
-    // });
     events.on('chatMessages', function(message) {
       //make sure the message is a 'create' message and that it's not "from" the bot
       //can't have him calling himself!
       if (message.operation === 'create' && message.model.fromUser.username != "odin-bot") {
-        // var data = message.model;
-        // var text = data.text;
+
         var messageData = {
           data: message.model,
           text: message.model.text,
           room: room
         }
-        // HERE LIES THe Foolish CAESAR CIPHER THING, which got annoying fast.
-        // var caesaredText = caesar(messageData.text,"X")
-        // if (caesaredText) {
-        //   send(`translated text: ${caesaredText}`, messageData.room)
-        // }
 
         for (var i in botFunctions) {
           if (messageData.text.toLowerCase().match(botFunctions[i].condition)){
@@ -149,9 +139,17 @@ function botResponseGiphy(messageData) {
   var user = data.fromUser.username;
   var search = text.replace(botFunctions.giphy.condition, '');
   // replace underscores and colons to spaces because emojis
+
+  if (search.match(/@\S+/) ){
+    user = search.match(/@\S+/)[0].replace('@','')
+    search = search.replace(/@\S+/, '')
+  }
+  console.log(user)
   search = search.replace(/_|:/g, ' ').trim();
+
   // if there is search text, search after it
   if (search) {
+
     if (randomInt(20) == 0) {
       search = "rickroll"
     }
