@@ -116,7 +116,33 @@ function botResponseHug(messageData){
 function botResponseHello(messageData){
   send(`oh hi there ${messageData.data.fromUser.displayName}`, messageData.room)
 }
-function botResponseGiphy(messageData){
+
+function chooseRandomGif(searchTerm) {
+  return new Promise(function(resolve, reject) {
+    giphy.search({q: searchTerm, limit:10}, function(err, result) {
+      if (err) reject('Error');
+
+      if (result.data.length) {
+        var image = result.data[randomInt(result.data.length)];
+        var imageUrl = image.images.original.url;
+        resolve(imageUrl);
+      } else {
+        chooseRandomGif("Fail");
+      }
+    });
+  });
+}
+
+function sendRickrollMessages(room) {
+  setTimeout(function() {
+    send("NEVER GONNA GIVE YOU UP :trollface:", room)
+  }, 6000);
+  setTimeout(function() {
+    send("NEVER GONNA LET YOU DOOOOWWWWN :trollface:", room)
+  }, 12000);
+}
+
+function botResponseGiphy(messageData) {
   var data = messageData.data;
   var text = messageData.text;
   var room = messageData.room;
@@ -126,38 +152,22 @@ function botResponseGiphy(messageData){
   search = search.replace(/_|:/g, ' ').trim();
   // if there is search text, search after it
   if (search) {
-    if (parseInt(Math.random()*20) == 0) {
+    if (randomInt(20) == 0) {
       search = "rickroll"
     }
-    giphy.search({q: search, limit: 20}, function (err, result, res) {
-      // if there are results, send a random one
-      if (result.data.length) {
-        var image = result.data[parseInt(Math.random()*result.data.length)];
-        var imgurl = image.images.original.url;
-        var feedcontent =  '@' + user + ' : __'+ search +'__ \n\n[!['+search+'](' + imgurl + ')](' + image.url + ')';
-        send(feedcontent, room);
-        if (search == "rickroll") {
-          setTimeout(function(){
-            send("NEVER GONNA GIVE YOU UP :trollface:", room)
-          }, 6000)
-          setTimeout(function(){
-            send("NEVER GONNA LET YOU DOOOOWWWWN :trollface:", room)
-          }, 12000)
-        }
-      } else {
-        // otherwise send a message, that there are no gifs with that search
-        var help = '@' + user + ': there is no gif with those words';
-        send(help, room);
-        giphy.search({q: "FAIL", limit: 10}, function (err, result, res) {
-          if (result.data.length) {
-            var image = result.data[parseInt(Math.random()*result.data.length)]
-            var imgurl = image.images.original.url;
-            send("![](" + imgurl + ")",room)
-          }
-        })
-      }
 
-    });
+    chooseRandomGif(search)
+      .then(function(imageUrl){
+        var feedContent = `@${user} __${search}__ \n\n [![${search}](${imageUrl})](${imageUrl})`;
+        send(feedContent, room);
+      })
+      .catch(function(){
+        send("there was an error", room);
+      });
+
+      if (search == "rickroll") {
+        sendRickrollMessages(room)
+      }
   } else {
     // otherwise send an explanation to user
     var help = '@' + user + ': use `/giphy` with a word, to get a gif related to that word, eg. `/giphy cats hats`';
@@ -303,7 +313,7 @@ function randomMod(){
 }
 
 function randomInt(range) {
-  return parseInt(Math.random()*range)
+  return parseInt(Math.random() * range);
 }
 //record time of event
 function getTime () {
