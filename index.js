@@ -144,7 +144,7 @@ function botResponseGiphy(messageData) {
     user = search.match(/@\S+/)[0].replace('@','')
     search = search.replace(/@\S+/, '')
   }
-  console.log(user)
+
   search = search.replace(/_|:/g, ' ').trim();
 
   // if there is search text, search after it
