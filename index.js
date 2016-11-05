@@ -8,8 +8,6 @@ var giphy = new Giphy(config.giphy.apikey);
 
 var request = require('request');
 
-var caesar = require('./caesar')
-
 var time = 0
 
 // gitter room name from config gets joined, to receive the room id on start
