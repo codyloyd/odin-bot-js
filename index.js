@@ -52,7 +52,7 @@ function listenToMessages (roomId) {
 
 var botFunctions = {
   giphy: {
-    condition: /^\/giphy/,
+    condition: /\/giphy/,
     response: botResponseGiphy
   },
   pointsbot: {
@@ -137,33 +137,36 @@ function botResponseGiphy(messageData) {
   var text = messageData.text;
   var room = messageData.room;
   var user = data.fromUser.username;
-  var search = text.replace(botFunctions.giphy.condition, '');
-  // replace underscores and colons to spaces because emojis
 
-  if (search.match(/@\S+/) ){
-    user = search.match(/@\S+/)[0].replace('@','')
-    search = search.replace(/@\S+/, '')
+  var GIPHY = "/giphy";
+  var searchTermRegex = new RegExp(GIPHY + "\\s+(.*)");
+  // Grab the search term
+  var searchTerm = text.match(searchTermRegex)[1];
+  var mentionRegex = /@\S+/;
+
+  if (text.match(mentionRegex) ){
+    user = text.match(mentionRegex)[0].replace('@','');
+    searchTerm = searchTerm.replace(mentionRegex, '');
   }
 
-  search = search.replace(/_|:/g, ' ').trim();
-
+  // replace underscores and colons to spaces because emojis
+  searchTerm = searchTerm.replace(/_|:/g, ' ').trim();
   // if there is search text, search after it
-  if (search) {
-
+  if (searchTerm) {
     if (randomInt(20) == 0) {
-      search = "rickroll"
+      searchTerm = "rickroll";
     }
 
-    chooseRandomGif(search)
+    chooseRandomGif(searchTerm)
       .then(function(imageUrl){
-        var feedContent = `@${user} __${search}__ \n\n [![${search}](${imageUrl})](${imageUrl})`;
+        var feedContent = `@${user} __${searchTerm}__ \n\n [![${searchTerm}](${imageUrl})](${imageUrl})`;
         send(feedContent, room);
       })
       .catch(function(){
-        send("there was an error", room);
+        send("Oops! couldn't serve you", room);
       });
 
-      if (search == "rickroll") {
+      if (searchTerm === 'rickroll') {
         sendRickrollMessages(room)
       }
   } else {
