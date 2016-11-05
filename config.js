@@ -3,7 +3,7 @@ var config = {
   // gitter settings for retrieving and sending messages
   gitter: {
     // gitter token, can be retrieved from https://developer.gitter.im/apps
-    token: 'a0db2d4e6004bb4aeaadb0381148bc9a4aba8aed',
+    token: process.env.GITTER_TOKEN,
 
 
     // room: {
@@ -43,7 +43,7 @@ var config = {
   giphy: {
 
    // giphy api key
-   apikey: 'dc6zaTOxFJmzC',
+   apikey: process.env.GIPHY_API_KEY,
 
    // regex to match the giphy command (could be anything)
    regex: /^\/giphy/
@@ -51,7 +51,7 @@ var config = {
   },
 
   pointsbot: {
-    token: '51b3ba1beec78d389dc21af70db66491',
+    token: process.env.POINTSBOT_TOKEN,
     regex: /@\S+\s?\+\+/
   }
 
