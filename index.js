@@ -84,7 +84,7 @@ var botFunctions = {
   hug: {
     condition: /\/hug/,
     response: botResponseHug
-  }
+  },
   dunno: {
     condition: /\I dunno|I don't know|I dont know/,
     response: botResponseDunno
