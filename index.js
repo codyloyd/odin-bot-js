@@ -86,9 +86,13 @@ var botFunctions = {
     response: botResponseHug
   },
   dunno: {
-    condition: /\I dunno|I don't know|I dont know/,
+    condition: /dunno|don't know|dont know/,
     response: botResponseDunno
   }
+}
+
+function botResponseDunno(messageData){
+  send('¯\\\\_ツ\_/¯', messageData.room)
 }
 
 function botResponseCaesar(messageData){
@@ -306,9 +310,7 @@ function botResponseWindows(messageData){
   }
 }
 
-function botResponseDunno(messageData){
-  send('¯\_ツ_/¯', messageData.room)
-}
+
 
 
 var counter = 0
