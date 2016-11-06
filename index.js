@@ -84,6 +84,10 @@ var botFunctions = {
   hug: {
     condition: /\/hug/,
     response: botResponseHug
+  },
+  dunno: {
+    condition: /\I dunno|I don't know|I dont know/,
+    response: botResponseDunno
   }
 }
 
@@ -300,6 +304,10 @@ function botResponseWindows(messageData){
     send("![](http://i.imgur.com/q9s5OKr.gif)", room)
     send("##did I hear someone say something about WINDOWS?",room)
   }
+}
+
+function botResponseDunno(messageData){
+  send('¯\_ツ_/¯', messageData.room)
 }
 
 
