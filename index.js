@@ -265,7 +265,7 @@ function botResponseHelp(messageData) {
     > - share a nice gif with your friends with \`/giphy\` and another word
     > - For help with gitter commands (and \`code\` syntax)press \`ctl+shift+alt+m\`
     > - say my name, or \`/help\` to view this message again
-    > - if you have any complaints about the bot, message ${randomMod()} :trollface:`,messageData.room)
+    > - I'm open source!  Hack me [HERE](https://github.com/codyloyd/odin-bot-js)!`,messageData.room)
 }
 function botResponsePartyParrot(messageData){
   var room = messageData.room;
