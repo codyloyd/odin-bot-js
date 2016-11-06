@@ -95,14 +95,6 @@ function botResponseDunno(messageData){
   send('¯\\\\_ツ\_/¯', messageData.room)
 }
 
-function botResponseCaesar(messageData){
-  var text = messageData.text;
-  text = text.replace(botFunctions.caesar.condition, "")
-  var key = parseInt(text.match(/\(-?\d+\)/)[0].replace("(","").replace(")",""))
-  text = text.replace(/\(-?\d+\)/,"")
-  send(`Translated Message: ${caesar(text,key)}`,messageData.room)
-}
-
 function botResponseGandalf(messageData){
   send(`[![](http://emojis.slackmojis.com/emojis/images/1450458362/181/gandalf.gif)](http://giphy.com/gifs/B3hcUhLX3BFHa/tile)`,messageData.room)
 }
@@ -112,7 +104,6 @@ function botResponseHug(messageData){
 function botResponseHello(messageData){
   send(`oh hi there ${messageData.data.fromUser.displayName}`, messageData.room)
 }
-
 function chooseRandomGif(searchTerm) {
   return new Promise(function(resolve, reject) {
     giphy.search({q: searchTerm, limit:10}, function(err, result) {
@@ -137,7 +128,6 @@ function sendRickrollMessages(room) {
     send("NEVER GONNA LET YOU DOOOOWWWWN :trollface:", room)
   }, 12000);
 }
-
 function botResponseGiphy(messageData) {
   var data = messageData.data;
   var text = messageData.text;
@@ -315,15 +305,10 @@ function botResponseWindows(messageData){
 
 var counter = 0
 
-function randomMod(){
-  var mods = ["Kevin, he's the boss around here anyway.","csrail, it's all his fault","Jimmie... just cause","anyone but cody... seriously he doesn't have anything to do with this."]
-  counter += 1
-  return mods[counter % mods.length]
-}
-
 function randomInt(range) {
   return parseInt(Math.random() * range);
 }
+
 //record time of event
 function getTime () {
   return new Date().getTime()
