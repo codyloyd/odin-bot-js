@@ -47,14 +47,12 @@ var config = {
 
    // regex to match the giphy command (could be anything)
    regex: /^\/giphy/
-
   },
 
   pointsbot: {
     token: process.env.POINTSBOT_TOKEN,
     regex: /@\S+\s?\+\+/
   }
-
 }
 
 module.exports = config;
