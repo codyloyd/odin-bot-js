@@ -16,7 +16,6 @@ var config = {
       "Code-Review",
       "Computer-Science",
       "Contributing",
-      "ContributingActivtity",
       "Getting-Hired",
       "Git",
       "HTML-CSS",
