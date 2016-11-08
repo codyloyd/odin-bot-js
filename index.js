@@ -84,15 +84,7 @@ var botFunctions = {
   hug: {
     condition: /\/hug/,
     response: botResponseHug
-  },
-  dunno: {
-    condition: /dunno|don't know|dont know/,
-    response: botResponseDunno
   }
-}
-
-function botResponseDunno(messageData){
-  send('¯\\\\_ツ\_/¯', messageData.room)
 }
 
 function botResponseGandalf(messageData){
