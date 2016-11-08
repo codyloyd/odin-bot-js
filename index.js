@@ -137,6 +137,11 @@ function botResponseGiphy(messageData) {
   var GIPHY = "/giphy";
   var searchTermRegex = new RegExp(GIPHY + "\\s+(.*)");
   // Grab the search term
+
+  if (!text.match(searchTermRegex)) {
+    send("use the giphy command with a keyword like so: `/giphy TACOS`", room)
+    return
+  }
   var searchTerm = text.match(searchTermRegex)[1];
   var mentionRegex = /@\S+/;
 
