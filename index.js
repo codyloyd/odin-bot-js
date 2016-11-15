@@ -101,7 +101,7 @@ function chooseRandomGif(searchTerm) {
     giphy.search({q: searchTerm, limit:10}, function(err, result) {
       if (err) reject('Error');
 
-      if (result) {
+      if (result.data.length) {
         var image = result.data[randomInt(result.data.length)];
         var imageUrl = image.images.original.url;
         resolve(imageUrl);
