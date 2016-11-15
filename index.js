@@ -106,7 +106,7 @@ function chooseRandomGif(searchTerm) {
         var imageUrl = image.images.original.url;
         resolve(imageUrl);
       } else {
-        chooseRandomGif("Fail");
+        resolve(chooseRandomGif('Fail'));
       }
     });
   });
