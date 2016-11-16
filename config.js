@@ -26,7 +26,7 @@ var config = {
       "Random",
       "Ruby",
       "theodinproject",
-      "secretbotroom"
+      // "secretbotroom"
     ],
 
     // custom webhook to send the gifs to the activity feed

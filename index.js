@@ -106,7 +106,8 @@ function chooseRandomGif(searchTerm) {
         var imageUrl = image.images.original.url;
         resolve(imageUrl);
       } else {
-        resolve(chooseRandomGif('Fail'));
+        reject("no gif")
+        // resolve(chooseRandomGif('Fail'));
       }
     });
   });
@@ -156,7 +157,13 @@ function botResponseGiphy(messageData) {
         send(feedContent, room);
       })
       .catch(function(){
-        send("Oops! couldn't serve you", room);
+        chooseRandomGif("FAIL")
+          .then(function(imageUrl){
+            send(`__no gif was found with that keyword!__ \n\n !["FAIL"](${imageUrl})`, room)
+          })
+          .catch(function(){
+            send("there was an error", room)
+          })
       });
 
       if (searchTerm === 'rickroll') {
