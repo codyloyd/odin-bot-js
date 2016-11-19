@@ -62,7 +62,7 @@ var botFunctions = {
     response: botResponseLeaderboard
   },
   help: {
-    condition: /^\/help|@odin-bot/,
+    condition: /^\/help/,
     response: botResponseHelp
   },
   partyparrot: {
