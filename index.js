@@ -115,11 +115,11 @@ function chooseRandomGif(searchTerm) {
 
 function sendRickrollMessages(room) {
   setTimeout(function() {
-    send("NEVER GONNA GIVE YOU UP :trollface:", room)
+    send("ANY BODY HUNGRY FOR SOME......", room)
   }, 6000);
   setTimeout(function() {
-    send("NEVER GONNA LET YOU DOOOOWWWWN :trollface:", room)
-  }, 12000);
+    send("PASTAAAAAAAA? :trollface:", room)
+  }, 8000);
 }
 function botResponseGiphy(messageData) {
   var data = messageData.data;
@@ -148,7 +148,7 @@ function botResponseGiphy(messageData) {
   // if there is search text, search after it
   if (searchTerm) {
     if (randomInt(20) == 0) {
-      searchTerm = "rickroll";
+      searchTerm = "PASTA";
     }
 
     chooseRandomGif(searchTerm)
@@ -166,7 +166,7 @@ function botResponseGiphy(messageData) {
           })
       });
 
-      if (searchTerm === 'rickroll') {
+      if (searchTerm === 'PASTA') {
         sendRickrollMessages(room)
       }
   } else {
@@ -298,7 +298,7 @@ function botResponsePartyParrot(messageData){
 }
 function botResponseWindows(messageData){
   var room = messageData.room;
-  if (parseInt(Math.random()*10) == 0){
+  if (parseInt(Math.random()*15) == 0){
     send("![](http://i.imgur.com/q9s5OKr.gif)", room)
     send("##did I hear someone say something about WINDOWS?",room)
   }
