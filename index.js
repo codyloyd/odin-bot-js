@@ -92,7 +92,7 @@ var botFunctions = {
 }
 
 function botResponseUseLinux(messageData){
-  send(`[Windows Article](https://medium.com/@codyloyd/why-cant-i-use-windows-for-the-odin-project-bf20a4bb135f#.29b6s6fp5)`,messageData.room)
+  send(`[Why you shouldn't use Windows for TOP.](https://medium.com/@codyloyd/why-cant-i-use-windows-for-the-odin-project-bf20a4bb135f#.29b6s6fp5)`,messageData.room)
 }
 function botResponseGandalf(messageData){
   send(`[![](http://emojis.slackmojis.com/emojis/images/1450458362/181/gandalf.gif)](http://giphy.com/gifs/B3hcUhLX3BFHa/tile)`,messageData.room)
