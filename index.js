@@ -84,9 +84,16 @@ var botFunctions = {
   hug: {
     condition: /\/hug/,
     response: botResponseHug
+  },
+  uselinux: {
+    condition: /\/windows/,
+    response: botResponseUseLinux
   }
 }
 
+function botResponseUseLinux(messageData){
+  send(`[Windows Article](https://medium.com/@codyloyd/why-cant-i-use-windows-for-the-odin-project-bf20a4bb135f#.29b6s6fp5)`,messageData.room)
+}
 function botResponseGandalf(messageData){
   send(`[![](http://emojis.slackmojis.com/emojis/images/1450458362/181/gandalf.gif)](http://giphy.com/gifs/B3hcUhLX3BFHa/tile)`,messageData.room)
 }
