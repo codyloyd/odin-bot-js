@@ -217,6 +217,12 @@ function botResponsePoints(messageData) {
     }
   }
   function addPointsToUser(name) {
+    if(name === "Techgeek9") {
+      //double points for this dude cause he's so cooool
+      requestUser(name, function(result){
+        request(`https://odin-points-bot.herokuapp.com/search/${result.username}?access_token=${config.pointsbot.token}`)
+      });
+    }
     if (name.toLowerCase() == user.toLowerCase()) {
       send("![](http://media0.giphy.com/media/RddAJiGxTPQFa/200.gif)", room)
       send("You can't do that!", room)
