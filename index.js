@@ -66,7 +66,7 @@ var botFunctions = {
     response: botResponseHelp
   },
   partyparrot: {
-    condition: /partyparrot|party_parrot|party parrot/,
+    condition: /partyparrot|party_parrot|party parrot|oiseau/,
     response: botResponsePartyParrot
   },
   windows: {
