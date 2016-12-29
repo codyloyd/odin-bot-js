@@ -88,6 +88,10 @@ var botFunctions = {
   uselinux: {
     condition: /\/windows/,
     response: botResponseUseLinux
+  },
+  motivate: {
+    condition: /\/motivate/,
+    response: botResponseDontGiveUp
   }
 }
 
@@ -209,7 +213,7 @@ function botResponsePoints(messageData) {
     } else if (points < 25) {
       return "Sweet!"
     } else if (points < 99) {
-      return "Woot!" 
+      return "Woot!"
     } else if (points < 105){
       return "HOLY CRAP!!"
     } else {
@@ -280,6 +284,7 @@ function botResponseHelp(messageData) {
     > - share a nice gif with your friends with \`/giphy\` and another word
     > - For help with gitter commands (and \`code\` syntax)press \`ctl+shift+alt+m\`
     > - say my name, or \`/help\` to view this message again
+    > - motivate your fellow odinites with \`/motivate\` and mention them
     > - I'm open source!  Hack me [HERE](https://github.com/codyloyd/odin-bot-js)!`,messageData.room)
 }
 function botResponsePartyParrot(messageData){
@@ -317,10 +322,23 @@ function botResponseWindows(messageData){
   }
 }
 
+function botResponseDontGiveUp(messageData) {
+  var room = messageData.room;
+  var user = messageData.data.fromUser.username;
+  var mentions = getMentions(messageData.text);
 
+  if (mentions) mentions = mentions.join(' ');
+  else mentions = `@${user}`; // if no one is mentioned, tag the requester
+
+  send(`${mentions} Don't give up! https://www.youtube.com/watch?v=KxGRhd_iWuE`, room);
+}
 
 
 var counter = 0
+
+function getMentions(message) {
+  return message.match(/@\S+/g);
+}
 
 function randomInt(range) {
   return parseInt(Math.random() * range);
