@@ -114,6 +114,11 @@ function chooseRandomGif(searchTerm) {
       if (err) reject('Error');
 
       if (result.data.length) {
+        // Filter 'r' rated gifs
+        result.data = result.data.filter(function(gif) {
+          return gif.hasOwnProperty('rating') && gif.rating != 'r';
+        });
+
         var image = result.data[randomInt(result.data.length)];
         var imageUrl = image.images.original.url;
         resolve(imageUrl);
