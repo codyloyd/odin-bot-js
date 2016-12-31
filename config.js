@@ -26,6 +26,7 @@ var config = {
       "Random",
       "Ruby",
       "theodinproject",
+      "LookingForPairs",
       // "secretbotroom"
     ],
 
