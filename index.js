@@ -132,10 +132,10 @@ function chooseRandomGif(searchTerm) {
 
 function sendRickrollMessages(room) {
   setTimeout(function() {
-    send("ANY BODY HUNGRY FOR SOME......", room)
+    send("OOOOH YEAH", room)
   }, 6000);
   setTimeout(function() {
-    send("PASTAAAAAAAA? :trollface:", room)
+    send("SAVAGE :trollface:", room)
   }, 8000);
 }
 function botResponseGiphy(messageData) {
@@ -165,7 +165,7 @@ function botResponseGiphy(messageData) {
   // if there is search text, search after it
   if (searchTerm) {
     if (randomInt(20) == 0) {
-      searchTerm = "PASTA";
+      searchTerm = "Randy Savage!!";
     }
 
     chooseRandomGif(searchTerm)
@@ -183,7 +183,7 @@ function botResponseGiphy(messageData) {
           })
       });
 
-      if (searchTerm === 'PASTA') {
+      if (searchTerm === 'Randy Savage!!') {
         sendRickrollMessages(room)
       }
   } else {
