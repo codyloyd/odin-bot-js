@@ -110,7 +110,7 @@ function botResponseHello(messageData){
 function chooseRandomGif(searchTerm) {
   console.log(searchTerm)
   return new Promise(function(resolve, reject) {
-    giphy.search({q: searchTerm, limit:10}, function(err, result) {
+    giphy.search({q: searchTerm, limit:25}, function(err, result) {
       if (err) reject('Error');
 
       if (result.data.length) {
