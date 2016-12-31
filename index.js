@@ -104,6 +104,7 @@ function botResponseHello(messageData){
   send(`oh hi there ${messageData.data.fromUser.displayName}`, messageData.room)
 }
 function chooseRandomGif(searchTerm) {
+  console.log(searchTerm)
   return new Promise(function(resolve, reject) {
     giphy.search({q: searchTerm, limit:10}, function(err, result) {
       if (err) reject('Error');
