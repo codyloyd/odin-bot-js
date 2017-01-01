@@ -1,10 +1,10 @@
-var config = {
+'use strict';
 
+var config = {
   // gitter settings for retrieving and sending messages
   gitter: {
     // gitter token, can be retrieved from https://developer.gitter.im/apps
     token: process.env.GITTER_TOKEN,
-
 
     // room: {
     //   // name of the gitter room, you want to retrieve and send the messages
@@ -12,36 +12,33 @@ var config = {
     // },
 
     rooms: [
-      "bot-spam-playground",
-      "Code-Review",
-      "Computer-Science",
-      "Contributing",
-      "Getting-Hired",
-      "Git",
-      "HTML-CSS",
-      "Interesting-Stuff",
-      "Javascript",
-      "ModTeam",
-      "Rails",
-      "Random",
-      "Ruby",
-      "theodinproject",
-      "LookingForPairs",
-      // "secretbotroom"
+      'bot-spam-playground',
+      'Code-Review',
+      'Computer-Science',
+      'Contributing',
+      'Getting-Hired',
+      'Git',
+      'HTML-CSS',
+      'Interesting-Stuff',
+      'Javascript',
+      'ModTeam',
+      'Rails',
+      'Random',
+      'Ruby',
+      'theodinproject',
+      'LookingForPairs',
+      // 'secretbotroom'
     ],
 
     // custom webhook to send the gifs to the activity feed
+    // @codyloyd: The following is unnecessary as we are not sending
+    // gifs to the activity feed.
     webhook: 'https://webhooks.gitter.im/e/ca75b94537a0fb91d19f',
 
-    // place, where gif should be sent
-    // possibilities: activity, chat
-    // if "chat" the message will be send from the user from whom the token is
     place: 'chat'
-
   },
 
   giphy: {
-
    // giphy api key
    apikey: process.env.GIPHY_API_KEY,
 
@@ -51,7 +48,7 @@ var config = {
 
   pointsbot: {
     token: process.env.POINTSBOT_TOKEN,
-    regex: /@\S+\s?\+\+/
+    regex: /@[A-Za-z0-9_-]\s?\+\+/
   }
 }
 
