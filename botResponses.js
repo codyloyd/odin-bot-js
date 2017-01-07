@@ -141,7 +141,7 @@ function botResponsePoints(messageData) {
             if (!error && response.statusCode == 200) {
               var userJson = JSON.parse(body);
               var points = helpers.pointsPluralizer(userJson.points);
-              chatHelpers.send(`${helpers.exclamation(userJson.points)} @${userJson.name} now has ${userJson.points} points`, room);
+              chatHelpers.send(`${helpers.exclamation(userJson.points)} @${userJson.name} now has ${userJson.points} ${points}`, room);
             }
           })
         }, function() {
