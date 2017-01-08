@@ -5,43 +5,32 @@ var config = {
   gitter: {
     // gitter token, can be retrieved from https://developer.gitter.im/apps
     token: process.env.GITTER_TOKEN,
-
-    // room: {
-    //   // name of the gitter room, you want to retrieve and send the messages
-    //   name: 'TheOdinProject/bot-spam-playground'
-    // },
-
+    //array of rooms that the bot should be active in
     rooms: [
-      'bot-spam-playground',
-      'Code-Review',
-      'Computer-Science',
-      'Contributing',
-      'Getting-Hired',
-      'Git',
-      'HTML-CSS',
-      'Interesting-Stuff',
-      'Javascript',
-      'ModTeam',
-      'Rails',
-      'Random',
-      'Ruby',
-      'theodinproject',
-      'LookingForPairs',
-      // 'secretbotroom'
+      'TheOdinProject/TheOdinProject/bot-spam-playground',
+      'TheOdinProject/Code-Review',
+      'TheOdinProject/Computer-Science',
+      'TheOdinProject/Contributing',
+      'TheOdinProject/Getting-Hired',
+      'TheOdinProject/Git',
+      'TheOdinProject/HTML-CSS',
+      'TheOdinProject/Interesting-Stuff',
+      'TheOdinProject/Javascript',
+      'TheOdinProject/ModTeam',
+      'TheOdinProject/Rails',
+      'TheOdinProject/Random',
+      'TheOdinProject/Ruby',
+      'TheOdinProject/theodinproject',
+      'TheOdinProject/LookingForPairs',
+      'codyloyd',
+      // 'TheOdinProject/secretbotroom'
     ],
-
-    // custom webhook to send the gifs to the activity feed
-    // @codyloyd: The following is unnecessary as we are not sending
-    // gifs to the activity feed.
-    webhook: 'https://webhooks.gitter.im/e/ca75b94537a0fb91d19f',
-
     place: 'chat'
   },
 
   giphy: {
    // giphy api key
    apikey: process.env.GIPHY_API_KEY,
-
    // regex to match the giphy command (could be anything)
    regex: /^\/giphy/
   },
