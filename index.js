@@ -11,14 +11,13 @@ var chatHelpers = require('./helpers/chatHelpers.js');
 var rooms = config.gitter.rooms;
 
 // join all the rooms
-for (var i = 0; i < rooms.length; i++) {
-  gitter.rooms.join('TheOdinProject/' + rooms[i])
-    .then(function(room) {
+rooms.forEach(room => {
+  gitter.rooms.join(room)
+    .then(room => {
       console.log(`Joined room: ${room.name}`);
       chatHelpers.listenToMessages(gitter, room.id);
     })
-    .fail(function(err) {
+    .fail(err => {
       console.log(`There was an error: ${err}`);
     });
-}
-
+})
