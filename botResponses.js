@@ -2,6 +2,7 @@
 
 var request = require('request');
 var config = require('./config.js');
+var time;
 
 var Giphy = require('giphy');
 var giphy = new Giphy(config.giphy.apikey);
@@ -9,20 +10,20 @@ var giphy = new Giphy(config.giphy.apikey);
 var helpers = require('./helpers/helpers.js');
 var chatHelpers = require('./helpers/chatHelpers.js');
 
-function botResponseUseLinux(messageData) {
-  chatHelpers.send(`[Why you shouldn't use Windows for TOP.](https://medium.com/@codyloyd/why-cant-i-use-windows-for-the-odin-project-bf20a4bb135f#.29b6s6fp5)`, messageData.room);
+function botResponseUseLinux({room}) {
+  chatHelpers.send(`[Why you shouldn't use Windows for TOP.](https://medium.com/@codyloyd/why-cant-i-use-windows-for-the-odin-project-bf20a4bb135f#.29b6s6fp5)`, room);
 }
 
-function botResponseGandalf(messageData) {
-  chatHelpers.send(`[![](http://emojis.slackmojis.com/emojis/images/1450458362/181/gandalf.gif)](http://giphy.com/gifs/B3hcUhLX3BFHa/tile)`, messageData.room);
+function botResponseGandalf({room}) {
+  chatHelpers.send(`[![](http://emojis.slackmojis.com/emojis/images/1450458362/181/gandalf.gif)](http://giphy.com/gifs/B3hcUhLX3BFHa/tile)`, room);
 }
 
-function botResponseHug(messageData) {
-  chatHelpers.send(`⊂(´・ω・｀⊂)`, messageData.room);
+function botResponseHug({room}) {
+  chatHelpers.send(`⊂(´・ω・｀⊂)`, room);
 }
 
-function botResponseHello(messageData) {
-  chatHelpers.send(`oh hi there ${messageData.data.fromUser.displayName}`, messageData.room);
+function botResponseHello({room, data:{fromUser: {displayName: name}}}) {
+  chatHelpers.send(`oh hi there ${name}`, room);
 }
 
 function chooseRandomGif(searchTerm) {
@@ -41,33 +42,17 @@ function chooseRandomGif(searchTerm) {
     });
   });
 }
-
-function sendRickrollMessages(room) {
-  setTimeout(function() {
-    chatHelpers.send('OOOOH YEAH', room)
-    }, 6000
-  );
-
-  setTimeout(function() {
-    chatHelpers.send('SAVAGE :trollface:', room)
-    }, 8000
-  );
-}
-
-function botResponseGiphy(messageData) {
-  var data = messageData.data;
-  var text = messageData.text;
-  var room = messageData.room;
-  var user = data.fromUser.username;
-
+// {data, text, room, data:{fromUser: {username: name}}}
+function botResponseGiphy({data, text, room, data:{fromUser: {username: user}}}) {
   var GIPHY = '/giphy';
   var searchTermRegex = new RegExp(GIPHY + '\\s+(.*)');
 
-  if (!text.match(searchTermRegex))
+  if (!text.match(searchTermRegex)) {
     return chatHelpers.send('use the giphy command with a keyword like so: `/giphy TACOS`', room);
+  }
   
   var searchTerm = text.match(searchTermRegex)[1];
-  console.log(`Searching for ${searchTerm}`);
+  console.log(`${searchTerm}`);
   var mentionRegex = /@([a-zA-Z0-9-_]+)/;
 
   if (mentionRegex.test(text)) {
@@ -80,9 +65,6 @@ function botResponseGiphy(messageData) {
 
   // if there is search text, search after it
   if (searchTerm) {
-    if (helpers.randomInt(20) == 0)
-      searchTerm = 'Randy Savage!!';
-
     chooseRandomGif(searchTerm)
       .then(function(imageUrl) {
         var feedContent = `@${user} __${searchTerm}__ \n\n [![${searchTerm}](${imageUrl})](${imageUrl})`;
@@ -97,10 +79,6 @@ function botResponseGiphy(messageData) {
             chatHelpers.send("there was an error", room);
           })
       });
-
-    if (searchTerm === 'Randy Savage!!') {
-      sendRickrollMessages(room)
-    }
   } else {
     // otherwise send an explanation to user
     var help = '@' + user + ': use `/giphy` with a word, to get a gif related to that word, eg. `/giphy cats hats`';
@@ -108,31 +86,20 @@ function botResponseGiphy(messageData) {
   }
 }
 
-function botResponsePoints(messageData) {
-  var room = messageData.room;
-  var text = messageData.text;
-  var data = messageData.data;
-  var requesterName = data.fromUser.username;
+function botResponsePoints({data, text, room, data:{fromUser: {username: requesterName}}}) {
   var names = getNamesFromText(text);
 
   for (var i in names)
     addPointsToUser(names[i]);
 
   function addPointsToUser(name) {
-      if (name === 'Techgeek9') {
-        //double points for this dude cause he's so cooool
-        helpers.requestUser(name, function(result) {
-          request(`https://odin-points-bot.herokuapp.com/search/${result.username}?access_token=${config.pointsbot.token}`)
-        });
-      }
-
       if (name.toLowerCase() == requesterName.toLowerCase()) {
         chatHelpers.send('![](http://media0.giphy.com/media/RddAJiGxTPQFa/200.gif)', room);
         chatHelpers.send("You can't do that!", room);
       } else if (name === 'odin-bot') {
         chatHelpers.send('awwwww shucks... :heart_eyes:', room);
       } else  {
-        var time = helpers.elapsedTime();
+        time = helpers.elapsedTime();
         if (time > 988000)
           chatHelpers.send('calculating points....', room);
 
@@ -161,9 +128,7 @@ function getNamesFromText(text) {
 }
 
 
-function botResponseLeaderboard(messageData) {
-  var room = messageData.room;
-
+function botResponseLeaderboard({room}) {
   chatHelpers.send('calculating points....', room);
 
   request(`https://odin-points-bot.herokuapp.com/users?access_token=${config.pointsbot.token}`,
@@ -188,7 +153,7 @@ function botResponseLeaderboard(messageData) {
   )
 }
 
-function botResponseHelp(messageData) {
+function botResponseHelp({room}) {
   chatHelpers.send(`> Odin Bot Commands
     > - give points to someone who has been helpful by mentioning their name and adding ++ : \`@username ++\`
     > - view the points leaderboard with \`/leaderboard\`
@@ -197,12 +162,10 @@ function botResponseHelp(messageData) {
     > - For help with gitter commands (and \`code\` syntax)press \`ctl+shift+alt+m\`
     > - say my name, or \`/help\` to view this message again
     > - motivate your fellow odinites with \`/motivate\` and mention them
-    > - I'm open source!  Hack me [HERE](https://github.com/codyloyd/odin-bot-js)!`, messageData.room)
+    > - I'm open source!  Hack me [HERE](https://github.com/codyloyd/odin-bot-js)!`, room)
 }
 
-function botResponsePartyParrot(messageData) {
-  var room = messageData.room;
-  var text = messageData.text;
+function botResponsePartyParrot({room,text}) {
   var parrots = [
     'http://cultofthepartyparrot.com/parrots/parrotdad.gif',
     'http://cultofthepartyparrot.com/parrots/parrot.gif',
@@ -211,15 +174,13 @@ function botResponsePartyParrot(messageData) {
     'http://cultofthepartyparrot.com/parrots/fiestaparrot.gif',
     'http://cultofthepartyparrot.com/parrots/explodyparrot.gif',
     'http://cultofthepartyparrot.com/parrots/aussieparrot.gif',
-    'http://emojis.slackmojis.com/emojis/images/1450738632/246/leftshark.png',
-    'http://emojis.slackmojis.com/emojis/images/1472757675/1132/otter-dance.gif'
+    // 'http://emojis.slackmojis.com/emojis/images/1450738632/246/leftshark.png',
+    // 'http://emojis.slackmojis.com/emojis/images/1472757675/1132/otter-dance.gif'
   ];
 
   if (text.toLowerCase().match('   p')) {
     var parrotUrl = 'http://cultofthepartyparrot.com/parrots/congaparrot.gif';
-
     chatHelpers.send(`![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})![](${parrotUrl})`, room);
-
   } else if (text.toLowerCase().match("!")) {
     chatHelpers.send(`![](${parrots[0]})`, room);
   } else {
@@ -228,18 +189,15 @@ function botResponsePartyParrot(messageData) {
   }
 }
 
-function botResponseWindows(messageData){
-  var room = messageData.room;
-  if (parseInt(Math.random() * 15) == 0) {
+function botResponseWindows({room}){
+  if (parseInt(Math.random() * 10) == 0) {
     chatHelpers.send("![](http://i.imgur.com/q9s5OKr.gif)", room);
     chatHelpers.send("##did I hear someone say something about WINDOWS?", room);
   }
 }
 
-function botResponseDontGiveUp(messageData) {
-  var room = messageData.room;
-  var user = messageData.data.fromUser.username;
-  var mentions = helpers.getMentions(messageData.text);
+function botResponseDontGiveUp({text,room,data:{fromUser:{username: user}}}) {
+  var mentions = helpers.getMentions(text);
 
   if (mentions) mentions = mentions.join(' ');
   else mentions = `@${user}`; // if no one is mentioned, tag the requester
