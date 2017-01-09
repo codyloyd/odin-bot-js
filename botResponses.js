@@ -42,7 +42,7 @@ function chooseRandomGif(searchTerm) {
     });
   });
 }
-// {data, text, room, data:{fromUser: {username: name}}}
+
 function botResponseGiphy({data, text, room, data:{fromUser: {username: user}}}) {
   var GIPHY = '/giphy';
   var searchTermRegex = new RegExp(GIPHY + '\\s+(.*)');
