@@ -35,7 +35,9 @@ function chooseRandomGif(searchTerm) {
         var randomIndex = helpers.randomInt(result.data.length);
         var image = result.data[randomIndex];
         var imageUrl = image.images.original.url;
-        resolve(imageUrl);
+        const url = image.url
+        console.log(url)
+        resolve({url,imageUrl});
       } else {
         reject('no gif');
       }
@@ -66,14 +68,14 @@ function botResponseGiphy({data, text, room, data:{fromUser: {username: user}}})
   // if there is search text, search after it
   if (searchTerm) {
     chooseRandomGif(searchTerm)
-      .then(function(imageUrl) {
-        var feedContent = `@${user} __${searchTerm}__ \n\n [![${searchTerm}](${imageUrl})](${imageUrl})`;
+      .then(function(image) {
+        var feedContent = `@${user} __${searchTerm}__ \n\n [![${searchTerm}](${image.imageUrl})](${image.url})`;
         chatHelpers.send(feedContent, room);
       })
       .catch(function() {
         chooseRandomGif('FAIL')
-          .then(function(imageUrl) {
-            chatHelpers.send(`__no gif was found with that keyword!__ \n\n !["FAIL"](${imageUrl})`, room);
+          .then(function(image) {
+            chatHelpers.send(`__no gif was found with that keyword!__ \n\n !["FAIL"](${image.imageUrl})`, room);
           })
           .catch(function() {
             chatHelpers.send("there was an error", room);
