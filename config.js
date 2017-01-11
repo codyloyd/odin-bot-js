@@ -7,7 +7,7 @@ var config = {
     token: process.env.GITTER_TOKEN,
     //array of rooms that the bot should be active in
     rooms: [
-      'TheOdinProject/TheOdinProject/bot-spam-playground',
+      'TheOdinProject/bot-spam-playground',
       'TheOdinProject/Code-Review',
       'TheOdinProject/Computer-Science',
       'TheOdinProject/Contributing',
