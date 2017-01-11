@@ -36,7 +36,6 @@ function chooseRandomGif(searchTerm) {
         var image = result.data[randomIndex];
         var imageUrl = image.images.original.url;
         const url = image.url
-        console.log(url)
         resolve({url,imageUrl});
       } else {
         reject('no gif');
