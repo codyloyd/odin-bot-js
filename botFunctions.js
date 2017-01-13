@@ -46,7 +46,7 @@ var botFunctions = {
     response: responses.botResponseDontGiveUp
   },
   chatWithBot: {
-    condition: /odin-bot/,
+    condition: /bot/,
     response: responses.botResponseChat
   }
 }
