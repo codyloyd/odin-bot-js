@@ -44,6 +44,10 @@ var botFunctions = {
   motivate: {
     condition: /\/motivate/,
     response: responses.botResponseDontGiveUp
+  },
+  chatWithBot: {
+    condition: /odin-bot/,
+    response: responses.botResponseChat
   }
 }
 

@@ -7,9 +7,26 @@ var time;
 var Giphy = require('giphy');
 var giphy = new Giphy(config.giphy.apikey);
 
+var apiai = require('apiai');
+var aiapp = apiai("38f9fe2acf0c42338923d212b3133980");
+
 var helpers = require('./helpers/helpers.js');
 var chatHelpers = require('./helpers/chatHelpers.js');
 
+function botResponseChat({room, text}) {
+  console.log(text)
+  var airequest = aiapp.textRequest(text, {
+    sessionId: '14'
+  });
+  console.log(airequest)
+  airequest.on('response', function(response) {
+    chatHelpers.send(response.result.fulfillment.speech, room);
+  });
+  airequest.on('error', function(error){
+    console.log(error)
+  });
+  airequest.end();
+}
 function botResponseUseLinux({room}) {
   chatHelpers.send(`[Why you shouldn't use Windows for TOP.](https://medium.com/@codyloyd/why-cant-i-use-windows-for-the-odin-project-bf20a4bb135f#.29b6s6fp5)`, room);
 }
@@ -218,3 +235,4 @@ exports.botResponseHelp = botResponseHelp;
 exports.botResponsePartyParrot = botResponsePartyParrot;
 exports.botResponseWindows = botResponseWindows;
 exports.botResponseDontGiveUp = botResponseDontGiveUp;
+exports.botResponseChat = botResponseChat;
