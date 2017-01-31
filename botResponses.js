@@ -18,7 +18,11 @@ function botResponseChat({room, text}) {
     sessionId: '14'
   });
   request.on('response', function(response) {
-    chatHelpers.send(response.result.fulfillment.speech, room);
+    console.log(response)
+    const text = response.result.fulfillment.speech;
+    if (text){
+      chatHelpers.send(text, room);
+    }
   });
   request.on('error', function(error){
     console.log(error)

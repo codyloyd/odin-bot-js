@@ -49,6 +49,10 @@ function exclamation(points) {
     return 'Woot!'
   } else if (points < 105) {
     return 'HOLY CRAP!!'
+  } else if (points > 199 && points < 206){
+    return 'DAM SON:'
+  } else if (points > 299 && points < 306){
+    return 'OK YOU CAN STOP NOW:'
   } else {
     return 'Woot!'
   }
