@@ -46,7 +46,7 @@ var botFunctions = {
     response: responses.botResponseDontGiveUp
   },
   chatWithBot: {
-    condition: /bot/,
+    condition: /bot\b/,
     response: responses.botResponseChat
   }
 }

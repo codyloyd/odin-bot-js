@@ -8,7 +8,7 @@ var Giphy = require('giphy');
 var giphy = new Giphy(config.giphy.apikey);
 
 var apiai = require('apiai');
-var aiapp = apiai("38f9fe2acf0c42338923d212b3133980");
+var aiapp = apiai(config.apiai.apikey);
 
 var helpers = require('./helpers/helpers.js');
 var chatHelpers = require('./helpers/chatHelpers.js');
@@ -18,10 +18,21 @@ function botResponseChat({room, text}) {
     sessionId: '14'
   });
   request.on('response', function(response) {
+<<<<<<< HEAD
     console.log(response)
     const text = response.result.fulfillment.speech;
     if (text){
       chatHelpers.send(text, room);
+=======
+    // console.log(response)
+    const speech = response.result.fulfillment.speech;
+    const action = response.result.action;
+    if (speech){
+      chatHelpers.send(speech, room);
+    }
+    if (action == 'sendGif'){
+      respondWithGif("hi", room)
+>>>>>>> afadee2b6a2ebfc63eeb19d2ad4ac2c0e7c3a5b0
     }
   });
   request.on('error', function(error){
@@ -62,6 +73,18 @@ function chooseRandomGif(searchTerm) {
       }
     });
   });
+}
+
+function respondWithGif(searchTerm, room){
+  const gifs = ["hi", "love", "pizza", "kiss"]
+   chooseRandomGif(gifs[helpers.randomInt(gifs.length)])
+      .then(function(image) {
+        var feedContent = `[![](${image.imageUrl})](${image.url})`;
+        chatHelpers.send(feedContent, room);
+      })
+      .catch(function() {
+        chatHelpers.send("there was an error", room);
+      });
 }
 
 function botResponseGiphy({data, text, room, data:{fromUser: {username: user}}}) {
