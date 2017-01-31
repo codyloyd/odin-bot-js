@@ -18,12 +18,6 @@ function botResponseChat({room, text}) {
     sessionId: '14'
   });
   request.on('response', function(response) {
-<<<<<<< HEAD
-    console.log(response)
-    const text = response.result.fulfillment.speech;
-    if (text){
-      chatHelpers.send(text, room);
-=======
     // console.log(response)
     const speech = response.result.fulfillment.speech;
     const action = response.result.action;
@@ -32,7 +26,6 @@ function botResponseChat({room, text}) {
     }
     if (action == 'sendGif'){
       respondWithGif("hi", room)
->>>>>>> afadee2b6a2ebfc63eeb19d2ad4ac2c0e7c3a5b0
     }
   });
   request.on('error', function(error){
