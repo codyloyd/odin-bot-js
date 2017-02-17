@@ -22,6 +22,7 @@ var config = {
       'TheOdinProject/Ruby',
       'TheOdinProject/theodinproject',
       'TheOdinProject/LookingForPairs',
+      'TCKchat/Lobby'
       // 'codyloyd',
       // 'TheOdinProject/secretbotroom'
     ],
