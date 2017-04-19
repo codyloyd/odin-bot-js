@@ -86,4 +86,4 @@ function botResponseGiphy({data, text, room}) {
   }
 }
 
-module.exports = botResponseGiphy
+module.exports = {botResponseGiphy, chooseRandomGif}
