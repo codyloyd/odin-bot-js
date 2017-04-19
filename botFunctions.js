@@ -1,4 +1,4 @@
-var responses = require('./botResponses.js');
+var responses = require('./botResponses.js')
 
 var botFunctions = {
   giphy: {
@@ -51,4 +51,4 @@ var botFunctions = {
   }
 }
 
-module.exports = botFunctions;
+module.exports = botFunctions

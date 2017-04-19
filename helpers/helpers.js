@@ -1,43 +1,44 @@
-'use strict';
+'use strict'
 
-var request = require('request');
-var config = require('../config.js');
+var request = require('request')
+var config = require('../config.js')
 
 function requestUser(username, callback, errorcallback) {
-  request({
-    url: 'https://api.gitter.im/v1/user?q=' + username,
-    headers: { Authorization: 'Bearer ' + config.gitter.token }
-    }, function (error, response, body) {
+  request(
+    {
+      url: 'https://api.gitter.im/v1/user?q=' + username,
+      headers: {Authorization: 'Bearer ' + config.gitter.token}
+    },
+    function(error, response, body) {
       if (!error && response.statusCode == 200) {
-        var user = JSON.parse(body).results[0];
+        var user = JSON.parse(body).results[0]
         if (user && user.username.toLowerCase() == username.toLowerCase())
-          callback(user);
-        else
-          errorcallback();
+          callback(user)
+        else errorcallback()
       }
     }
   )
 }
 
 function getMentions(message) {
-  return message.match(/@\S+/g);
+  return message.match(/@\S+/g)
 }
 
 function randomInt(range) {
-  return parseInt(Math.random() * range);
+  return parseInt(Math.random() * range)
 }
 
 //record time of event
-function getTime () {
-  return new Date().getTime();
+function getTime() {
+  return new Date().getTime()
 }
 
 function elapsedTime(time) {
-  return (getTime() - time) / 1000;
+  return (getTime() - time) / 1000
 }
 
 function pointsPluralizer(points) {
-  return (points === 1) ? 'point' : 'points';
+  return points === 1 ? 'point' : 'points'
 }
 
 function exclamation(points) {
@@ -49,19 +50,18 @@ function exclamation(points) {
     return 'Woot!'
   } else if (points < 105) {
     return 'HOLY CRAP!!'
-  } else if (points > 199 && points < 206){
+  } else if (points > 199 && points < 206) {
     return 'DAM SON:'
-  } else if (points > 299 && points < 306){
+  } else if (points > 299 && points < 306) {
     return 'OK YOU CAN STOP NOW:'
   } else {
     return 'Woot!'
   }
 }
 
-
-exports.requestUser = requestUser;
-exports.getMentions = getMentions;
-exports.randomInt = randomInt;
-exports.elapsedTime = elapsedTime;
-exports.pointsPluralizer = pointsPluralizer;
-exports.exclamation = exclamation;
+exports.requestUser = requestUser
+exports.getMentions = getMentions
+exports.randomInt = randomInt
+exports.elapsedTime = elapsedTime
+exports.pointsPluralizer = pointsPluralizer
+exports.exclamation = exclamation

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 var config = {
   // gitter settings for retrieving and sending messages
@@ -21,8 +21,8 @@ var config = {
       'TheOdinProject/Random',
       'TheOdinProject/Ruby',
       'TheOdinProject/theodinproject',
-      'TheOdinProject/LookingForPairs',
-      'TCKchat/Lobby'
+      'TheOdinProject/LookingForPairs'
+      // 'TCKchat/Lobby'
       // 'codyloyd',
       // 'TheOdinProject/secretbotroom'
     ],
@@ -30,10 +30,10 @@ var config = {
   },
 
   giphy: {
-   // giphy api key
-   apikey: process.env.GIPHY_API_KEY,
-   // regex to match the giphy command (could be anything)
-   regex: /^\/giphy/
+    // giphy api key
+    apikey: process.env.GIPHY_API_KEY,
+    // regex to match the giphy command (could be anything)
+    regex: /^\/giphy/
   },
 
   pointsbot: {
@@ -45,4 +45,4 @@ var config = {
   }
 }
 
-module.exports = config;
+module.exports = config
