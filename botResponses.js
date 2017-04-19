@@ -52,7 +52,7 @@ function botResponseHello({room, data:{fromUser: {displayName: name}}}) {
 
 function chooseRandomGif(searchTerm) {
   return new Promise(function(resolve, reject) {
-    giphy.search({ q: searchTerm, limit: 25 }, function(err, result) {
+    giphy.search({ q: searchTerm, limit: 25, rating: 'g' }, function(err, result) {
       if (err) reject('error');
 
       if (result.data.length) {
