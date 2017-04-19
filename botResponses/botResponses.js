@@ -1,17 +1,14 @@
 'use strict'
 
 var request = require('request')
-var config = require('./config.js')
+var config = require('../config.js')
 var time
-
-var Giphy = require('giphy')
-var giphy = new Giphy(config.giphy.apikey)
 
 var apiai = require('apiai')
 var aiapp = apiai(config.apiai.apikey)
 
-var helpers = require('./helpers/helpers.js')
-var chatHelpers = require('./helpers/chatHelpers.js')
+var helpers = require('../helpers/helpers.js')
+var chatHelpers = require('../helpers/chatHelpers.js')
 
 function botResponseChat({room, text}) {
   var request = aiapp.textRequest(text, {
@@ -54,95 +51,6 @@ function botResponseHug({room}) {
 
 function botResponseHello({room, data: {fromUser: {displayName: name}}}) {
   chatHelpers.send(`oh hi there ${name}`, room)
-}
-
-function chooseRandomGif(searchTerm) {
-  return new Promise(function(resolve, reject) {
-    giphy.search({q: searchTerm, limit: 25, rating: 'g'}, function(
-      err,
-      result
-    ) {
-      if (err) reject('error')
-
-      if (result.data.length) {
-        var randomIndex = helpers.randomInt(result.data.length)
-        var image = result.data[randomIndex]
-        var imageUrl = image.images.original.url
-        const url = image.url
-        resolve({url, imageUrl})
-      } else {
-        reject('no gif')
-      }
-    })
-  })
-}
-
-function respondWithGif(searchTerm, room) {
-  const gifs = ['hi', 'love', 'pizza', 'kiss']
-  chooseRandomGif(gifs[helpers.randomInt(gifs.length)])
-    .then(function(image) {
-      var feedContent = `[![](${image.imageUrl})](${image.url})`
-      chatHelpers.send(feedContent, room)
-    })
-    .catch(function() {
-      chatHelpers.send('there was an error', room)
-    })
-}
-
-function botResponseGiphy({
-  data,
-  text,
-  room,
-  data: {fromUser: {username: user}}
-}) {
-  var GIPHY = '/giphy'
-  var searchTermRegex = new RegExp(GIPHY + '\\s+(.*)')
-
-  if (!text.match(searchTermRegex)) {
-    return chatHelpers.send(
-      'use the giphy command with a keyword like so: `/giphy TACOS`',
-      room
-    )
-  }
-
-  var searchTerm = text.match(searchTermRegex)[1]
-  console.log(`${searchTerm}`)
-  var mentionRegex = /@([a-zA-Z0-9-_]+)/
-  if (mentionRegex.test(text)) {
-    user = text.match(mentionRegex)[1]
-    searchTerm = searchTerm.replace(mentionRegex, '')
-  }
-
-  // replace underscores and colons to spaces because emojis
-  searchTerm = searchTerm.replace(/_|:/g, ' ').trim()
-
-  // if there is search text, search after it
-  if (searchTerm) {
-    chooseRandomGif(searchTerm)
-      .then(function(image) {
-        var feedContent = `@${user} __${searchTerm}__ \n\n [![${searchTerm}](${image.imageUrl})](${image.url})`
-        chatHelpers.send(feedContent, room)
-      })
-      .catch(function() {
-        chooseRandomGif('FAIL')
-          .then(function(image) {
-            chatHelpers.send(
-              `__no gif was found with that keyword!__ \n\n !["FAIL"](${image.imageUrl})`,
-              room
-            )
-          })
-          .catch(function() {
-            chatHelpers.send('there was an error', room)
-          })
-      })
-  } else {
-    // otherwise send an explanation to user
-    var help =
-      '@' +
-      user +
-      ': use `/giphy` with a word, to get a gif related to that word, eg. `/giphy cats hats`'
-    chatHelpers.send(help, room)
-  }
 }
 
 function botResponsePoints({
@@ -309,7 +217,6 @@ exports.botResponseUseLinux = botResponseUseLinux
 exports.botResponseGandalf = botResponseGandalf
 exports.botResponseHug = botResponseHug
 exports.botResponseHello = botResponseHello
-exports.botResponseGiphy = botResponseGiphy
 exports.botResponsePoints = botResponsePoints
 exports.botResponseLeaderboard = botResponseLeaderboard
 exports.botResponseHelp = botResponseHelp
