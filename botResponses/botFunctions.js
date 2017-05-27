@@ -1,11 +1,11 @@
 var responses = require('./botResponses.js')
-const giphy = require('./giphy')
+const { botResponseGiphy } = require('./giphy')
 const { botResponseLeaderboard, botResponsePoints } = require('./points')
 
 var botFunctions = {
   giphy: {
     condition: /\/giphy/,
-    response: giphy
+    response: botResponseGiphy
   },
   pointsbot: {
     condition: /@[a-zA-Z0-9-_]+\s?\+\+\s?/,
