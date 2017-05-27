@@ -1,6 +1,6 @@
 var responses = require('./botResponses.js')
 const giphy = require('./giphy')
-const {botResponseLeaderboard, botResponsePoints} = require('./points')
+const { botResponseLeaderboard, botResponsePoints } = require('./points')
 
 var botFunctions = {
   giphy: {
@@ -46,11 +46,11 @@ var botFunctions = {
   motivate: {
     condition: /\/motivate/,
     response: responses.botResponseDontGiveUp
-  },
-  chatWithBot: {
-    condition: /bot\b/,
-    response: responses.botResponseChat
   }
+  // chatWithBot: {
+  //   condition: /bot\b|hello|hi/,
+  //   response: responses.botResponseChat
+  // }
 }
 
 module.exports = botFunctions

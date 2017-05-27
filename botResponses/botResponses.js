@@ -9,64 +9,64 @@ var aiapp = apiai(config.apiai.apikey)
 
 var helpers = require('../helpers/helpers.js')
 var chatHelpers = require('../helpers/chatHelpers.js')
-var {chooseRandomGif} = require('./giphy')
+var { chooseRandomGif } = require('./giphy')
 
-function botResponseChat({room, text}) {
-  var request = aiapp.textRequest(text, {
-    sessionId: '14'
-  })
-  request.on('response', function(response) {
-    // console.log(response)
-    const speech = response.result.fulfillment.speech
-    const action = response.result.action
-    if (speech) {
-      chatHelpers.send(speech, room)
-    }
-    if (action == 'sendGif') {
-      respondWithGif('hi', room)
-    }
-  })
-  request.on('error', function(error) {
-    console.log(error)
-  })
-  request.end()
-}
+// function botResponseChat({room, text}) {
+//   var request = aiapp.textRequest(text, {
+//     sessionId: '14'
+//   })
+//   request.on('response', function(response) {
+//     // console.log(response)
+//     const speech = response.result.fulfillment.speech
+//     const action = response.result.action
+//     if (speech) {
+//       chatHelpers.send(speech, room)
+//     }
+//     if (action == 'sendGif') {
+//       respondWithGif('hi', room)
+//     }
+//   })
+//   request.on('error', function(error) {
+//     console.log(error)
+//   })
+//   request.end()
+// }
 
-function respondWithGif(searchTerm, room) {
-  const gifs = ['hi', 'love', 'pizza', 'kiss']
-  chooseRandomGif(gifs[helpers.randomInt(gifs.length)])
-    .then(function(image) {
-      var feedContent = `[![](${image.imageUrl})](${image.url})`
-      chatHelpers.send(feedContent, room)
-    })
-    .catch(function() {
-      chatHelpers.send('there was an error', room)
-    })
-}
+// function respondWithGif(searchTerm, room) {
+//   const gifs = ['hi', 'love', 'pizza', 'kiss']
+//   chooseRandomGif(gifs[helpers.randomInt(gifs.length)])
+//     .then(function(image) {
+//       var feedContent = `[![](${image.imageUrl})](${image.url})`
+//       chatHelpers.send(feedContent, room)
+//     })
+//     .catch(function() {
+//       chatHelpers.send('there was an error', room)
+//     })
+// }
 
-function botResponseUseLinux({room}) {
+function botResponseUseLinux({ room }) {
   chatHelpers.send(
     `[Why you shouldn't use Windows for TOP.](https://medium.com/@codyloyd/why-cant-i-use-windows-for-the-odin-project-bf20a4bb135f#.29b6s6fp5)`,
     room
   )
 }
 
-function botResponseGandalf({room}) {
+function botResponseGandalf({ room }) {
   chatHelpers.send(
     `[![](http://emojis.slackmojis.com/emojis/images/1450458362/181/gandalf.gif)](http://giphy.com/gifs/B3hcUhLX3BFHa/tile)`,
     room
   )
 }
 
-function botResponseHug({room}) {
+function botResponseHug({ room }) {
   chatHelpers.send(`⊂(´・ω・｀⊂)`, room)
 }
 
-function botResponseHello({room, data: {fromUser: {displayName: name}}}) {
+function botResponseHello({ room, data: { fromUser: { displayName: name } } }) {
   chatHelpers.send(`oh hi there ${name}`, room)
 }
 
-function botResponseHelp({room}) {
+function botResponseHelp({ room }) {
   chatHelpers.send(
     `> Odin Bot Commands
     > - give points to someone who has been helpful by mentioning their name and adding ++ : \`@username ++\`
@@ -81,7 +81,7 @@ function botResponseHelp({room}) {
   )
 }
 
-function botResponsePartyParrot({room, text}) {
+function botResponsePartyParrot({ room, text }) {
   var parrots = [
     'http://cultofthepartyparrot.com/parrots/parrotdad.gif',
     'http://cultofthepartyparrot.com/parrots/parrot.gif',
@@ -108,7 +108,7 @@ function botResponsePartyParrot({room, text}) {
   }
 }
 
-function botResponseWindows({room}) {
+function botResponseWindows({ room }) {
   if (parseInt(Math.random() * 10) == 0) {
     chatHelpers.send('![](http://i.imgur.com/q9s5OKr.gif)', room)
     chatHelpers.send('##did I hear someone say something about WINDOWS?', room)
@@ -118,7 +118,7 @@ function botResponseWindows({room}) {
 function botResponseDontGiveUp({
   text,
   room,
-  data: {fromUser: {username: user}}
+  data: { fromUser: { username: user } }
 }) {
   var mentions = helpers.getMentions(text)
 
