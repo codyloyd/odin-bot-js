@@ -21,8 +21,8 @@ var config = {
       'TheOdinProject/Random',
       'TheOdinProject/Ruby',
       'TheOdinProject/theodinproject',
-      'TheOdinProject/LookingForPairs'
-      // 'codyloyd',
+      'TheOdinProject/LookingForPairs',
+      'codyloyd',
       // 'TheOdinProject/secretbotroom'
     ],
     place: 'chat'

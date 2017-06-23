@@ -6,17 +6,14 @@ const chatHelpers = require('../helpers/chatHelpers.js')
 
 function chooseRandomGif(searchTerm) {
   return new Promise(function(resolve, reject) {
-    giphy.search({q: searchTerm, limit: 25, rating: 'g'}, function(
+    giphy.translate({s: searchTerm}, function(
       err,
       result
     ) {
       if (err) reject('error')
-
-      if (result.data.length) {
-        var randomIndex = randomInt(result.data.length)
-        var image = result.data[randomIndex]
-        var imageUrl = image.images.original.url
-        const url = image.url
+      if (result.data) {
+        const imageUrl = result.data.images.original.url
+        const url = result.data.url
         resolve({url, imageUrl})
       } else {
         reject('no gif')
@@ -43,7 +40,6 @@ function botResponseGiphy({data, text, room}) {
   const mentionRegex = /@([a-zA-Z0-9-_]+)/
   let user = data.fromUser.username
   // replace underscores and colons to spaces because emojis
-  let searchTerm = text.match(searchTermRegex)[1].replace(/_|:/g, ' ').trim()
 
   if (!text.match(searchTermRegex)) {
     return chatHelpers.send(
@@ -51,6 +47,7 @@ function botResponseGiphy({data, text, room}) {
       room
     )
   }
+  let searchTerm = text.match(searchTermRegex)[1].replace(/_|:/g, ' ').trim()
 
   console.log(`${searchTerm}`)
   if (mentionRegex.test(text)) {
