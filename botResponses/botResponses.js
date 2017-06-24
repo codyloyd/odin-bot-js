@@ -138,6 +138,6 @@ exports.botResponseHug = botResponseHug
 exports.botResponseHello = botResponseHello
 exports.botResponseHelp = botResponseHelp
 exports.botResponsePartyParrot = botResponsePartyParrot
-exports.botResponseWindows = botResponseWindows
+// exports.botResponseWindows = botResponseWindows
 exports.botResponseDontGiveUp = botResponseDontGiveUp
 // exports.botResponseChat = botResponseChat
