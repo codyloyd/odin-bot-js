@@ -11,8 +11,8 @@ function chooseRandomGif(searchTerm) {
       result
     ) {
       if (err) reject('error')
-      console.log(result)
-      if (result.data) {
+      console.log(result.data)
+      if (result.data.images) {
         const imageUrl = result.data.images.original.url
         const url = result.data.url
         resolve({url, imageUrl})
