@@ -25,7 +25,7 @@ function chooseRandomGif(searchTerm) {
 
 function respondWithGif(searchTerm, room) {
   const gifs = ['hi', 'love', 'pizza', 'kiss']
-  chooseRandomGif(gifs[helpers.randomInt(gifs.length)])
+  chooseRandomGif(gifs[randomInt(gifs.length)])
     .then(function(image) {
       var feedContent = `[![](${image.imageUrl})](${image.url})`
       chatHelpers.send(feedContent, room)
@@ -84,4 +84,4 @@ function botResponseGiphy({data, text, room}) {
   }
 }
 
-module.exports = {botResponseGiphy, chooseRandomGif}
+module.exports = {botResponseGiphy, chooseRandomGif, respondWithGif}

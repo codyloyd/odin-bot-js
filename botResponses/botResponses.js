@@ -9,7 +9,7 @@ var aiapp = apiai(config.apiai.apikey)
 
 var helpers = require('../helpers/helpers.js')
 var chatHelpers = require('../helpers/chatHelpers.js')
-var { chooseRandomGif } = require('./giphy')
+var { respondWithGif } = require('./giphy')
 
 // function botResponseChat({room, text}) {
 //   var request = aiapp.textRequest(text, {
@@ -64,6 +64,7 @@ function botResponseHug({ room }) {
 
 function botResponseHello({ room, data: { fromUser: { displayName: name } } }) {
   chatHelpers.send(`oh hi there ${name}`, room)
+  respondWithGif('hi', room)
 }
 
 function botResponseHelp({ room }) {
@@ -108,12 +109,12 @@ function botResponsePartyParrot({ room, text }) {
   }
 }
 
-function botResponseWindows({ room }) {
-  if (parseInt(Math.random() * 10) == 0) {
-    chatHelpers.send('![](http://i.imgur.com/q9s5OKr.gif)', room)
-    chatHelpers.send('##did I hear someone say something about WINDOWS?', room)
-  }
-}
+// function botResponseWindows({ room }) {
+//   if (parseInt(Math.random() * 10) == 0) {
+//     chatHelpers.send('![](http://i.imgur.com/q9s5OKr.gif)', room)
+//     chatHelpers.send('##did I hear someone say something about WINDOWS?', room)
+//   }
+// }
 
 function botResponseDontGiveUp({
   text,
