@@ -23,10 +23,10 @@ var botFunctions = {
     condition: /partyparrot|party_parrot|party parrot|oiseau/,
     response: responses.botResponsePartyParrot
   },
-  windows: {
+  /*windows: {
     condition: /windows/,
     response: responses.botResponseWindows
-  },
+  },*/
   hello: {
     condition: /hello odin-bot|hello bot|hi odin-bot|hi bot/,
     response: responses.botResponseHello
