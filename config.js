@@ -37,7 +37,7 @@ var config = {
 
   pointsbot: {
     token: process.env.POINTSBOT_TOKEN,
-    regex: /@[A-Za-z0-9_-]\s?\+\+/
+    regex: /@[A-Za-z0-9_-]\s?(\+\+|:star:)/
   },
   apiai: {
     apikey: process.env.APIAI_TOKEN
