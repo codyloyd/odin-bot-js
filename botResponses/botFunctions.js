@@ -8,7 +8,7 @@ var botFunctions = {
     response: botResponseGiphy
   },
   pointsbot: {
-    condition: /@[a-zA-Z0-9-_]+\s?(\+\+|:star:)\s?/,
+    condition: /@[a-zA-Z0-9-_]+\s?(\+\+|star)\s?/,
     response: botResponsePoints
   },
   leaderboard: {
