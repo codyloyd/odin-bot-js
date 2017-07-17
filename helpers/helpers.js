@@ -60,7 +60,7 @@ function exclamation(points) {
 }
 
 function getNamesFromText(text) {
-  var regex = /@([a-zA-Z0-9-_]+)\s?\+\+/g, matches = [], match
+  var regex = /@([a-zA-Z0-9-_]+)\s?(\+\+|:star:)/g, matches = [], match
   while ((match = regex.exec(text)) !== null)
     matches.push(match[1])
   return matches
