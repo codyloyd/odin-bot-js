@@ -23,7 +23,7 @@ var config = {
       'TheOdinProject/theodinproject',
       'TheOdinProject/LookingForPairs',
       'codyloyd',
-      // 'TheOdinProject/secretbotroom'
+      'TheOdinProject/secretbotroom'
     ],
     place: 'chat'
   },

@@ -6,6 +6,7 @@ var time
 
 var apiai = require('apiai')
 var aiapp = apiai(config.apiai.apikey)
+var weatherKey = 'changeMe'
 
 var helpers = require('../helpers/helpers.js')
 var chatHelpers = require('../helpers/chatHelpers.js')
@@ -132,12 +133,52 @@ function botResponseDontGiveUp({
   )
 }
 
+function botResponseWeatherInCity({text, room}) {
+  const units = {
+    'C': 'metric',
+    'F': 'imperial',
+  }
+
+  const query = text.split(" ")
+  let city = query[1]
+  let unit = query[0][query[0].length-1].toLowerCase()
+  if(unit == 'c') {
+    unit = 'C'
+  } else if(unit == 'f') {
+    unit = 'F'
+  } else {
+    unit = 'K'
+  }
+
+  chatHelpers.send(`checking weather in ${city}`, room)
+
+  request(
+    `http://api.openweathermap.org/data/2.5/weather?APPID=${weatherKey}&q=${city}&units=${units[unit]}`,
+    function(error, response, body) {
+      console.log('error:', error)
+      console.log('statusCode:', response && response.statusCode)
+
+      if(body) {
+        const weatherResponse = JSON.parse(body)
+        const description = weatherResponse.weather[0].description
+        const temp = weatherResponse.main.temp
+        const high = weatherResponse.main.temp_max
+        const low = weatherResponse.main.temp_min
+        const city = weatherResponse["name"]
+        const message = `${description} in ${city} today, with temp of ${temp}${unit}. High: ${high}. Low: ${low}.`
+        chatHelpers.send(message, room)
+      }
+    }
+  )
+}
+
 exports.botResponseUseLinux = botResponseUseLinux
 exports.botResponseGandalf = botResponseGandalf
 exports.botResponseHug = botResponseHug
 exports.botResponseHello = botResponseHello
 exports.botResponseHelp = botResponseHelp
 exports.botResponsePartyParrot = botResponsePartyParrot
+exports.botResponseWeatherInCity = botResponseWeatherInCity
 // exports.botResponseWindows = botResponseWindows
 exports.botResponseDontGiveUp = botResponseDontGiveUp
 // exports.botResponseChat = botResponseChat
