@@ -40,6 +40,9 @@ var config = {
   },
   apiai: {
     apikey: process.env.APIAI_TOKEN
+  },
+  weatherAPI: {
+    weatherApiKey: process.env.WEATHER_API_KEY
   }
 }
 
