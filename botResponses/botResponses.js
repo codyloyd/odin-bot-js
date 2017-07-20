@@ -6,7 +6,7 @@ var time
 
 var apiai = require('apiai')
 var aiapp = apiai(config.apiai.apikey)
-var weatherKey = 'changeMe'
+var weatherKey = config.weatherAPI.weatherApiKey
 
 var helpers = require('../helpers/helpers.js')
 var chatHelpers = require('../helpers/chatHelpers.js')
