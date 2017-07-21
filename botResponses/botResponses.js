@@ -71,7 +71,7 @@ function botResponseHello({ room, data: { fromUser: { displayName: name } } }) {
 function botResponseHelp({ room }) {
   chatHelpers.send(
     `> Odin Bot Commands
-    > - give points to someone who has been helpful by mentioning their name and adding ++ : \`@username ++\`
+    > - give points to someone who has been helpful by mentioning their name and adding ++ : \`@username ++\` or by giving them a star : \`@username :star:\`
     > - view the points leaderboard with \`/leaderboard\`
     > - To view or join the rest of the Odin chatrooms click [HERE](https://gitter.im/orgs/TheOdinProject/rooms).
     > - share a nice gif with your friends with \`/giphy\` and another word
