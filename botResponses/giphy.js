@@ -18,7 +18,7 @@ function chooseRandomGif(searchTerm, room) {
       try {
         if (result.data.images && result.data.images.original.url && result.data.url) {
           // console.log("Successful:", searchTerm)
-          const imageUrl = result.data.images.original.url.dfs.sdfs
+          const imageUrl = result.data.images.original.url
           const url = result.data.url
           resolve({url, imageUrl})
         } else {
