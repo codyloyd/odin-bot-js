@@ -140,7 +140,7 @@ function botResponseWeatherInCity({text, room}) {
   }
 
   const query = text.split(" ")
-  let city = query[1]
+  let city = text.match(/(?!\/weather.?) [a-zA-Z ]*/)[0]
   let unit = query[0][query[0].length-1].toLowerCase()
   if(unit == 'c') {
     unit = 'C'
@@ -149,7 +149,7 @@ function botResponseWeatherInCity({text, room}) {
   } else {
     unit = 'K'
   }
-
+  console.log(city, unit)
   chatHelpers.send(`checking weather in ${city}`, room)
 
   request(
@@ -157,15 +157,19 @@ function botResponseWeatherInCity({text, room}) {
     function(error, response, body) {
       console.log('error:', error)
       console.log('statusCode:', response && response.statusCode)
-
       if(body) {
         const weatherResponse = JSON.parse(body)
+        if (weatherResponse.cod === '404') {
+          chatHelpers.send(`OOOPS ${weatherResponse.message}`, room)
+          return
+        }
+        const iconCode = weatherResponse.weather[0].icon
         const description = weatherResponse.weather[0].description
         const temp = weatherResponse.main.temp
         const high = weatherResponse.main.temp_max
         const low = weatherResponse.main.temp_min
         const city = weatherResponse["name"]
-        const message = `${description} in ${city} today, with temp of ${temp}${unit}. High: ${high}. Low: ${low}.`
+        const message = `${description} in ${city} today, with temp of ${temp}${unit}. High: ${high}. Low: ${low}. \n ![](http://openweathermap.org/img/w/${iconCode}.png)`
         chatHelpers.send(message, room)
       }
     }
