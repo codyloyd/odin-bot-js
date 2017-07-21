@@ -8,9 +8,10 @@
   "author": "Cody Loyd",
   "license": "MIT",
   "dependencies": {
+    "apiai": "3.0.3",
     "giphy": "0.0.4",
     "node-gitter": "^1.2.8",
     "request": "^2.57.0",
-    "apiai": "3.0.3"
+    "winston": "^2.3.1"
   }
 }

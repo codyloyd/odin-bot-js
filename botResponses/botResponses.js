@@ -2,6 +2,7 @@
 
 var request = require('request')
 var config = require('../config.js')
+var winston = require('winston');
 var time
 
 var apiai = require('apiai')

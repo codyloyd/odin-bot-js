@@ -3,22 +3,35 @@ const Giphy = require('giphy')
 const giphy = new Giphy(config.giphy.apikey)
 const {randomInt} = require('../helpers/helpers.js')
 const chatHelpers = require('../helpers/chatHelpers.js')
+var winston = require('winston');
+winston.add(winston.transports.File, { filename: 'giphy.log' });
+winston.remove(winston.transports.Console)
+winston.level = 'debug'
 
-function chooseRandomGif(searchTerm) {
+function chooseRandomGif(searchTerm, room) {
   return new Promise(function(resolve, reject) {
     giphy.translate({s: searchTerm}, function(
       err,
       result
     ) {
       if (err) reject('error')
-      if (result.data.images && result.data.images.original.url && result.data.url) {
-        console.log("Successful:", searchTerm)
-        const imageUrl = result.data.images.original.url
-        const url = result.data.url
-        resolve({url, imageUrl})
-      } else {
-        console.log(result)
-        reject('no gif')
+      try {
+        if (result.data.images && result.data.images.original.url && result.data.url) {
+          // console.log("Successful:", searchTerm)
+          const imageUrl = result.data.images.original.url.dfs.sdfs
+          const url = result.data.url
+          resolve({url, imageUrl})
+        } else {
+          console.log(result)
+          reject('no gif')
+        }
+      } catch (e) {
+        chatHelpers.send('hey @codyloyd there was an error.. you should check the logs', room)
+        winston.log('debug', 'ERRRRRRRRRRORRRRRRRRRRRRRR')
+        winston.log('debug', e)
+        winston.log('debug', 'SEARCHTERM:')
+        winston.log("debug", searchTerm)
+        winston.log('debug', result)
       }
     })
   })
@@ -26,7 +39,7 @@ function chooseRandomGif(searchTerm) {
 
 function respondWithGif(searchTerm, room) {
   const gifs = ['hi', 'love', 'pizza', 'kiss']
-  chooseRandomGif(gifs[randomInt(gifs.length)])
+  chooseRandomGif(gifs[randomInt(gifs.length)], room)
     .then(function(image) {
       var feedContent = `[![](${image.imageUrl})](${image.url})`
       chatHelpers.send(feedContent, room)
@@ -72,13 +85,13 @@ function botResponseGiphy({data, text, room}) {
   }
 
   if (searchTerm) {
-    chooseRandomGif(searchTerm)
+    chooseRandomGif(searchTerm, room)
       .then(image => {
         const feedContent = `@${user} __${searchTerm}__ \n\n [![${searchTerm}](${image.imageUrl})](${image.url})`
         chatHelpers.send(feedContent, room)
       })
       .catch(function() {
-        chooseRandomGif('FAIL')
+        chooseRandomGif('FAIL', room)
           .then(image => {
             chatHelpers.send(
               `__no gif was found with that keyword!__ \n\n !["FAIL"](${image.imageUrl})`,
