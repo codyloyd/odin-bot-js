@@ -160,7 +160,8 @@ function botResponseWeatherInCity({text, room}) {
       if(body) {
         const weatherResponse = JSON.parse(body)
         if (weatherResponse.cod === '404') {
-          chatHelpers.send(`OOOPS ${weatherResponse.message}`, room)
+          chatHelpers.send(`${weatherResponse.message}.... how about this instead?`, room)
+          botResponseWeatherInCity({text: "/weather Intercourse PA", room})
           return
         }
         const iconCode = weatherResponse.weather[0].icon
