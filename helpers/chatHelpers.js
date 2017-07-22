@@ -1,6 +1,9 @@
 'use strict'
 
 const botFunctions = require('../botResponses/botFunctions.js')
+winston.add(winston.transports.File, { filename: 'giphy.log' });
+winston.remove(winston.transports.Console)
+winston.level = 'debug'
 
 function listenToMessages(gitter, roomId) {
   gitter.rooms.find(roomId).then(function(room) {
@@ -22,7 +25,14 @@ function listenToMessages(gitter, roomId) {
         }
         Object.values(botFunctions).forEach(({condition, response}) => {
           if (messageData.text.toLowerCase().match(condition))
-            response(messageData)
+            try {
+              response(messageData)
+            } catch (error) {
+              chatHelpers.send('hey @codyloyd there was an error.. you should check the logs', room)
+              console.log(error)
+              winston.log('debug', messageData.text)
+              winston.log('debug', error)
+            }
         })
       }
     })
