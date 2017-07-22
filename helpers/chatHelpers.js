@@ -29,7 +29,7 @@ function listenToMessages(gitter, roomId) {
             try {
               response(messageData)
             } catch (error) {
-              chatHelpers.send('hey @codyloyd there was an error.. you should check the logs', room)
+              send('hey @codyloyd there was an error.. you should check the logs', room)
               console.log(error)
               winston.log('debug', messageData.text)
               winston.log('debug', error)
