@@ -47,26 +47,11 @@ function respondWithGif(searchTerm, room) {
     })
 }
 
-const ONETIMECOUNTERFORASMCODERJOKE = 0
-
-
 function botResponseGiphy({data, text, room}) {
   const GIPHY = '/giphy'
   const searchTermRegex = new RegExp(GIPHY + '\\s+(.*)')
   const mentionRegex = /@([a-zA-Z0-9-_]+)/
   let user = data.fromUser.username
-
-
-  if (user === 'AsmCoder110' && ONETIMECOUNTERFORASMCODERJOKE == 0) {
-    chatHelpers.send('GIF QUOTA EXCEEDED.... SORRY BRO :trollface:')
-    setTimeout(() => {
-      chatHelpers.send('just kidding lol')
-    }, 5000)
-    ONETIMECOUNTERFORASMCODERJOKE += 1
-    return
-  }
-
-
   // replace underscores and colons to spaces because emojis
   if (!text.match(searchTermRegex)) {
     return chatHelpers.send(
