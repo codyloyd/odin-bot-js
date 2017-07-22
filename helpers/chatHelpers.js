@@ -1,6 +1,7 @@
 'use strict'
 
 const botFunctions = require('../botResponses/botFunctions.js')
+var winston = require('winston');
 winston.add(winston.transports.File, { filename: 'giphy.log' });
 winston.remove(winston.transports.Console)
 winston.level = 'debug'
