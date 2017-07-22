@@ -4,8 +4,6 @@ const giphy = new Giphy(config.giphy.apikey)
 const {randomInt} = require('../helpers/helpers.js')
 const chatHelpers = require('../helpers/chatHelpers.js')
 var winston = require('winston');
-winston.add(winston.transports.File, { filename: 'giphy.log' });
-winston.remove(winston.transports.Console)
 winston.level = 'debug'
 
 function chooseRandomGif(searchTerm, room) {
