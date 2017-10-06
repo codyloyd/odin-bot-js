@@ -64,6 +64,10 @@ function botResponseHug({ room }) {
   chatHelpers.send(`⊂(´・ω・｀⊂)`, room)
 }
 
+function botResponseShrug({ room }) {
+  chatHelpers.send(String.raw`¯\\\_(ツ)_/¯`, room)
+}
+
 function botResponseHello({ room, data: { fromUser: { displayName: name } } }) {
   chatHelpers.send(`oh hi there ${name}`, room)
   respondWithGif('hi', room)
@@ -206,4 +210,5 @@ exports.botResponseWeatherInCity = botResponseWeatherInCity
 // exports.botResponseWindows = botResponseWindows
 exports.botResponseDontGiveUp = botResponseDontGiveUp
 exports.botResponseCode = botResponseCode
+exports.botResponseShrug = botResponseShrug
 // exports.botResponseChat = botResponseChat
