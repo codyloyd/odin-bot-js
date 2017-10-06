@@ -22,6 +22,7 @@ var config = {
       'TheOdinProject/Ruby',
       'TheOdinProject/theodinproject',
       'TheOdinProject/LookingForPairs',
+      'TheOdinProject/New-JS-course',
       'codyloyd',
       // 'TheOdinProject/secretbotroom'
     ],
