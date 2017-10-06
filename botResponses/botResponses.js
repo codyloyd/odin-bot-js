@@ -183,7 +183,7 @@ function botResponseWeatherInCity({text, room}) {
           botResponseWeatherInCity({text: "/weather Intercourse PA", room})
           return
         }
-        const iconCode = weatherResponse.weather[0].icon
+        const iconCode = weatherResponse.weather[0].icon || "50d"
         const description = weatherResponse.weather[0].description
         const temp = weatherResponse.main.temp
         const high = weatherResponse.main.temp_max
