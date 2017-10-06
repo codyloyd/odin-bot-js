@@ -50,7 +50,7 @@ var botFunctions = {
   weather: {
     condition: /\/weather.? [a-zA-Z]+/,
     response: responses.botResponseWeatherInCity
-  }
+  },
   code: {
     condition: /\/code/,
     response: responses.botResponseCode
