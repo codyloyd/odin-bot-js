@@ -51,6 +51,10 @@ var botFunctions = {
     condition: /\/weather.? [a-zA-Z]+/,
     response: responses.botResponseWeatherInCity
   }
+  code: {
+    condition: /\/code/,
+    response: responses.botResponseCode
+  }
   // chatWithBot: {
   //   condition: /bot\b|hello|hi/,
   //   response: responses.botResponseChat
