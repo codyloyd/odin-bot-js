@@ -58,6 +58,10 @@ var botFunctions = {
   shrug: {
     condition: /\/shrug/,
     response: responses.botResponseShrug,
+  },  
+  spoopy: {
+    condition: /spoopy/,
+    response: responses.botResponseSpoopy,
   },
   // chatWithBot: {
   //   condition: /bot\b|hello|hi/,
