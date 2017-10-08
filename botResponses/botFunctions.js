@@ -54,7 +54,11 @@ var botFunctions = {
   code: {
     condition: /\/code/,
     response: responses.botResponseCode
-  }
+  },
+  shrug: {
+    condition: /\/shrug/,
+    response: responses.botResponseShrug,
+  },
   // chatWithBot: {
   //   condition: /bot\b|hello|hi/,
   //   response: responses.botResponseChat
