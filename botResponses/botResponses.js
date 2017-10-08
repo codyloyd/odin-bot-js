@@ -200,6 +200,10 @@ function botResponseWeatherInCity({text, room}) {
   )
 }
 
+function botResponseSpoopy({
+  chatHelpers.send('https://media.giphy.com/media/EHKRUd3NpbHFe/giphy.gif', room)
+}
+
 exports.botResponseUseLinux = botResponseUseLinux
 exports.botResponseGandalf = botResponseGandalf
 exports.botResponseHug = botResponseHug
