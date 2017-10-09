@@ -4,7 +4,6 @@ var request = require('request')
 var config = require('../config.js')
 var winston = require('winston');
 var time
-var chuck = require('./chucky.js');
 
 var apiai = require('apiai')
 var aiapp = apiai(config.apiai.apikey)
