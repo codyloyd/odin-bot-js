@@ -4,7 +4,7 @@ var request = require('request')
 var config = require('../config.js')
 var winston = require('winston');
 var time
-var chuck = require('chucky.js');
+var chuck = require('./chucky.js');
 
 var apiai = require('apiai')
 var aiapp = apiai(config.apiai.apikey)
@@ -158,8 +158,12 @@ function botResponseDontGiveUp({
 }
 
 function botResponseChuck({ room }) {
-  var joke = chuck();
-  chatHelpers.send(joke, room)
+  request("http://api.icndb.com/jokes/random", function(error, response, body) {
+    const json = JSON.parse(body)
+    var value = json["value"]
+    var joke = value["joke"]
+    chatHelpers.send(joke, room)
+  })
 }
 
 function botResponseWeatherInCity({text, room}) {
