@@ -159,7 +159,7 @@ function botResponseDontGiveUp({
 
 function botResponseChuck({ room }) {
   var joke = chuck;
-  chatHelpers.send(`chuck`, room)
+  chatHelpers.send(chuck, room)
 }
 
 function botResponseWeatherInCity({text, room}) {
