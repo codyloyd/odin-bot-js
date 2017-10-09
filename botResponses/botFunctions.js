@@ -67,6 +67,10 @@ var botFunctions = {
   //   condition: /bot\b|hello|hi/,
   //   response: responses.botResponseChat
   // }
+  chuck: {
+    condition: /\/chuck norris/,
+    response: responses.botResponseChuck
+  }
 }
 
 module.exports = botFunctions

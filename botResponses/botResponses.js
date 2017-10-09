@@ -1,9 +1,10 @@
-'use strict'
+﻿'use strict'
 
 var request = require('request')
 var config = require('../config.js')
 var winston = require('winston');
 var time
+var chuck = require('chucky.js');
 
 var apiai = require('apiai')
 var aiapp = apiai(config.apiai.apikey)
@@ -156,6 +157,11 @@ function botResponseDontGiveUp({
   )
 }
 
+function botResponseChuck({ room }) {
+  var joke = chuck();
+  chatHelpers.send(joke, room)
+}
+
 function botResponseWeatherInCity({text, room}) {
   const units = {
     'C': 'metric',
@@ -215,5 +221,6 @@ exports.botResponseWeatherInCity = botResponseWeatherInCity
 // exports.botResponseWindows = botResponseWindows
 exports.botResponseDontGiveUp = botResponseDontGiveUp
 exports.botResponseCode = botResponseCode
+exports.botResponseChuck = botResponseChuck
 exports.botResponseShrug = botResponseShrug
 // exports.botResponseChat = botResponseChat
