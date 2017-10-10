@@ -52,7 +52,7 @@ var botFunctions = {
     response: responses.botResponseWeatherInCity
   },
   code: {
-    condition: /\/code/,
+    condition: /^\/code\b/,
     response: responses.botResponseCode
   },
   shrug: {
