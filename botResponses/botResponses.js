@@ -80,7 +80,7 @@ function botResponseHelp({ room }) {
     > - view the points leaderboard with \`/leaderboard\`
     > - To view or join the rest of the Odin chatrooms click [HERE](https://gitter.im/orgs/TheOdinProject/rooms).
     > - share a nice gif with your friends with \`/giphy\` and another word
-    > - For help with gitter commands (and \`code\` syntax)press \`ctl+shift+alt+m\`
+    > - For help with gitter commands (and \`code\` syntax) press \`ctl+shift+alt+m\`
     > - Type \`/help\` to view this message again
     > - motivate your fellow odinites with \`/motivate\` and mention them
     > - I'm open source!  Hack me [HERE](https://github.com/codyloyd/odin-bot-js)!`,
