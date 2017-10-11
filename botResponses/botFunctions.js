@@ -72,7 +72,7 @@ var botFunctions = {
     response: responses.botResponseChuck
   },
   justasecond: {
-    condition: /^\/jas\b|^\/holdon\b/,
+    condition: /^\/jas\b|^\/holdon\b/igm,
     response: responses.botResponseHoldOn
   }
 }
