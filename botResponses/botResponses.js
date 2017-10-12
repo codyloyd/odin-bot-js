@@ -233,3 +233,4 @@ exports.botResponseCode = botResponseCode
 exports.botResponseChuck = botResponseChuck
 exports.botResponseShrug = botResponseShrug
 // exports.botResponseChat = botResponseChat
+exports.botResponseHoldOn = botResponseHoldOn
