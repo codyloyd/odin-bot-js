@@ -215,7 +215,7 @@ function botResponseSpoopy({room}) {
 
 function botResponseHoldOn({ room }) {
   chatHelpers.send(
-    `[![]('https://media.giphy.com/media/l1J9zVWOtZHcDfZ5u/giphy.gif')`, room
+    `![](https://media.giphy.com/media/l1J9zVWOtZHcDfZ5u/giphy.gif)`, room
   )
 }
 
