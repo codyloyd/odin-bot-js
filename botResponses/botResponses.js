@@ -213,6 +213,12 @@ function botResponseSpoopy({room}) {
   chatHelpers.send('https://media.giphy.com/media/EHKRUd3NpbHFe/giphy.gif', room)
 }
 
+function botResponseHoldOn({ room }) {
+  chatHelpers.send(
+    `![](https://media.giphy.com/media/l1J9zVWOtZHcDfZ5u/giphy.gif)`, room
+  )
+}
+
 exports.botResponseSpoopy = botResponseSpoopy
 exports.botResponseUseLinux = botResponseUseLinux
 exports.botResponseGandalf = botResponseGandalf
@@ -227,3 +233,4 @@ exports.botResponseCode = botResponseCode
 exports.botResponseChuck = botResponseChuck
 exports.botResponseShrug = botResponseShrug
 // exports.botResponseChat = botResponseChat
+exports.botResponseHoldOn = botResponseHoldOn

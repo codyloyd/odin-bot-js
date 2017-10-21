@@ -70,6 +70,10 @@ var botFunctions = {
   chuck: {
     condition: /\/chuck norris/,
     response: responses.botResponseChuck
+  },
+  justasecond: {
+    condition: /^\/jas\b|^\/holdon\b/igm,
+    response: responses.botResponseHoldOn
   }
 }
 
