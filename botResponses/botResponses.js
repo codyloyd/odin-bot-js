@@ -156,6 +156,22 @@ function botResponseDontGiveUp({
   )
 }
 
+function botResponseJustDoIt({
+  text,
+  room,
+  data: { fromUser: { username: user } }
+}) {
+  var mentions = helpers.getMentions(text)
+
+  if (mentions) mentions = mentions.join(' ')
+  else mentions = `@${user}` //if no one is mentioend, tag the requester
+
+  chatHelpers.send(
+    `${mentions} What are you waiting for?! https://www.youtube.com/watch?v=ZXsQAXx_ao0`,
+    room
+  )
+}
+
 function botResponseChuck({ room }) {
   request("http://api.icndb.com/jokes/random", function(error, response, body) {
     const json = JSON.parse(body)

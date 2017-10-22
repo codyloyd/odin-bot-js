@@ -47,6 +47,10 @@ var botFunctions = {
     condition: /\/motivate/,
     response: responses.botResponseDontGiveUp
   },
+  justdoit: {
+    condition: /\/just do it/
+    response: responses.botResponseJustDoIt
+  },
   weather: {
     condition: /\/weather.? [a-zA-Z]+/,
     response: responses.botResponseWeatherInCity
