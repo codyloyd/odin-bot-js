@@ -90,12 +90,12 @@ function botResponseHelp({ room }) {
 
 function botResponseCode({ room }) {
   chatHelpers.send(
-    `> #Writing Code in Chat
-    > To write multiple lines of code in chat, use three [backticks](https://i.stack.imgur.com/ETTnT.jpg) like so:
+    `> #Composing Code Snippets
+    > To write multiple lines of code use three [backticks](https://i.stack.imgur.com/ETTnT.jpg):
     > \\\`\\\`\\\`
     > [Put your Code here!]
     > \\\`\\\`\\\`
-    > For a small inline portion of code, just use one backtick like so:
+    > For `inline code` use one backtick:
     >\\\`Code here!\\\``,
     room
   )
