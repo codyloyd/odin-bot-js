@@ -245,6 +245,7 @@ exports.botResponsePartyParrot = botResponsePartyParrot
 exports.botResponseWeatherInCity = botResponseWeatherInCity
 // exports.botResponseWindows = botResponseWindows
 exports.botResponseDontGiveUp = botResponseDontGiveUp
+exports.botResponseJustDoIt = botResponseJustDoIt
 exports.botResponseCode = botResponseCode
 exports.botResponseChuck = botResponseChuck
 exports.botResponseShrug = botResponseShrug
