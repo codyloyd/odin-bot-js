@@ -76,6 +76,7 @@ function botResponseHello({ room, data: { fromUser: { displayName: name } } }) {
 function botResponseHelp({ room }) {
   chatHelpers.send(
     `> #Odin-Bot Commands
+    > - **By posting in this chatroom you agree to our [code of conduct](https://github.com/TheOdinProject/theodinproject/blob/master/doc/code_of_conduct.md)**
     > - give points to someone who has been helpful by mentioning their name and adding ++ : \`@username ++\` or by giving them a star : \`@username :star:\`
     > - view the points leaderboard with \`/leaderboard\`
     > - To view or join the rest of the Odin chatrooms click [HERE](https://gitter.im/orgs/TheOdinProject/rooms).
