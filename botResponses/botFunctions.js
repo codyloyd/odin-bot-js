@@ -48,7 +48,7 @@ var botFunctions = {
     response: responses.botResponseDontGiveUp
   },
   justdoit: {
-    condition: /\/justdoit/
+    condition: /\/justdoit/,
     response: responses.botResponseJustDoIt
   },
   weather: {
