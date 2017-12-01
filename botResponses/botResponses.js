@@ -92,7 +92,7 @@ function botResponseHelp({ room }) {
 function botResponseCode({ room }) {
   chatHelpers.send(
     `> #Composing Code Snippets
-    > To write multiple lines of code use three [backticks](https://i.stack.imgur.com/ETTnT.jpg):
+    > To write multiple lines of code use three [backticks](https://i.stack.imgur.com/ETTnT.jpg) (on their own line):
     > \\\`\\\`\\\`
     > [Put your Code here!]
     > \\\`\\\`\\\`
