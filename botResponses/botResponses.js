@@ -238,7 +238,7 @@ function botResponseHoldOn({ room }) {
 
 function botResponseWhatsNew({room}) {
   chatHelpers.send(
-    `![](https://giphy.com/gifs/summary-sKJjgWEvB79HW)`, room
+    `![](https://i.imgur.com/2ABsZGt.gif)`, room
   )
 }
 
