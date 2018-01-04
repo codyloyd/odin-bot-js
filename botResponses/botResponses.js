@@ -236,6 +236,20 @@ function botResponseHoldOn({ room }) {
   )
 }
 
+function botResponseWhatsNew({room}) {
+  var new = [
+    'https://giphy.com/gifs/summary-sKJjgWEvB79HW',
+    'https://static.tumblr.com/ec7563ec708d7eb03bde96cf046007a8/zzb0pjj/Uvfo2i5ll/tumblr_static__640_v2.gif',
+    'https://media1.tenor.com/images/1f9d68a184610ca3bf1db89ccd5d9407/tenor.gif?itemid=4550891',
+    'https://media.tenor.com/images/7023e83020ef75b6774f7034d93e0dd5/tenor.gif'
+  ]
+  var index = helpers.randomInt(new.length)
+  chatHelpers.send(
+    `![](${new[index]})`, room
+  )
+}
+
+exports.botResponseWhatsNew = botResponseWhatsNew
 exports.botResponseSpoopy = botResponseSpoopy
 exports.botResponseUseLinux = botResponseUseLinux
 exports.botResponseGandalf = botResponseGandalf
