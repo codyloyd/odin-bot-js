@@ -80,7 +80,7 @@ var botFunctions = {
     response: responses.botResponseHoldOn
   },
   whatsnew: {
-    condition: /whats new/,
+    condition: /what's new/,
     response: responses.botResponseWhatsNew
   }
 }
