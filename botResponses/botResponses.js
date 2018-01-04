@@ -156,7 +156,7 @@ function botResponseDontGiveUp({
     room
   )
 }
-
+botResponseWhatsNew
 function botResponseJustDoIt({
   text,
   room,
@@ -236,6 +236,13 @@ function botResponseHoldOn({ room }) {
   )
 }
 
+function botResponseWhatsNew({room}) {
+  chatHelpers.send(
+    `![](https://giphy.com/gifs/summary-sKJjgWEvB79HW)`, room
+  )
+}
+
+exports.botResponseWhatsNew = botResponseWhatsNew
 exports.botResponseSpoopy = botResponseSpoopy
 exports.botResponseUseLinux = botResponseUseLinux
 exports.botResponseGandalf = botResponseGandalf

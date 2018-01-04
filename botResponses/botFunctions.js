@@ -62,7 +62,7 @@ var botFunctions = {
   shrug: {
     condition: /\/shrug/,
     response: responses.botResponseShrug,
-  },  
+  },
   spoopy: {
     condition: /spoopy/,
     response: responses.botResponseSpoopy,
@@ -78,6 +78,10 @@ var botFunctions = {
   justasecond: {
     condition: /^\/jas\b|^\/holdon\b/igm,
     response: responses.botResponseHoldOn
+  },
+  whatsnew: {
+    condition: /whats new/,
+    response: responses.botResponseWhatsNew
   }
 }
 
