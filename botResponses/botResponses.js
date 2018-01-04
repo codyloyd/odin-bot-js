@@ -156,7 +156,7 @@ function botResponseDontGiveUp({
     room
   )
 }
-botResponseWhatsNew
+
 function botResponseJustDoIt({
   text,
   room,
