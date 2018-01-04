@@ -236,6 +236,13 @@ function botResponseHoldOn({ room }) {
   )
 }
 
+function botResponseWhatsNew({room}) {
+  chatHelpers.send(
+    `![](https://i.imgur.com/2ABsZGt.gif)`, room
+  )
+}
+
+exports.botResponseWhatsNew = botResponseWhatsNew
 exports.botResponseSpoopy = botResponseSpoopy
 exports.botResponseUseLinux = botResponseUseLinux
 exports.botResponseGandalf = botResponseGandalf
