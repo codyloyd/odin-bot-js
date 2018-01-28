@@ -69,7 +69,7 @@ function botResponseLeaderboard({room}) {
         var users = JSON.parse(body)
         var usersList = ''
         var looplength = (function(length) {
-          return length < 14 ? length : 14
+          return (length < 14 ? length : 14)
         })(users.length)
 
         for (var i = 0; i < looplength; i++) {
