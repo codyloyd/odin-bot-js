@@ -237,6 +237,12 @@ function botResponseHoldOn({ room }) {
   )
 }
 
+function botResponseNotNice ({ room }) {
+  chatHelpers.send(
+    'http://media.riffsy.com/images/636a97aa416ad674eb2b72d4a6e9ad6c/tenor.gif', room
+  )
+}
+
 exports.botResponseSpoopy = botResponseSpoopy
 exports.botResponseUseLinux = botResponseUseLinux
 exports.botResponseGandalf = botResponseGandalf
@@ -253,3 +259,4 @@ exports.botResponseChuck = botResponseChuck
 exports.botResponseShrug = botResponseShrug
 // exports.botResponseChat = botResponseChat
 exports.botResponseHoldOn = botResponseHoldOn
+exports.botResponseNotNice = botResponseNotNice

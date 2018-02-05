@@ -78,6 +78,10 @@ var botFunctions = {
   justasecond: {
     condition: /^\/jas\b|^\/holdon\b/igm,
     response: responses.botResponseHoldOn
+  },
+  notNice: {
+    condition: /@[a-zA-Z0-9-_]+\s?(\-\-)/,
+    response: responses.botResponseNotNice
   }
 }
 
