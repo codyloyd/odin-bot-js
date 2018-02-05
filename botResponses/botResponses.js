@@ -48,7 +48,8 @@ var { respondWithGif } = require('./giphy')
 
 function botResponseUseLinux({ room }) {
   chatHelpers.send(
-    `[Why you shouldn't use Windows for TOP.](https://medium.com/@codyloyd/why-cant-i-use-windows-for-the-odin-project-bf20a4bb135f#.29b6s6fp5)`,
+    `[Why you shouldn't use Windows for TOP.](https://medium.com/@codyloyd/why-cant-i-use-windows-for-the-odin-project-bf20a4bb135f#.29b6s6fp5)
+     - [If you need to, check out Windows Subsystem for Linux](http://wsl-guide.org/)`,
     room
   )
 }
