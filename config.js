@@ -7,23 +7,15 @@ var config = {
     token: process.env.GITTER_TOKEN,
     //array of rooms that the bot should be active in
     rooms: [
-      'TheOdinProject/General',
+      'TheOdinProject/theodinproject',
       'TheOdinProject/Front-End',
       'TheOdinProject/Back-End',
       'TheOdinProject/Off-Topic',
       'TheOdinProject/Contributing',
       'TheOdinProject/Getting-Hired',
       'TheOdinProject/ModTeam',
-      
-      //Depricated
       'TheOdinProject/Random',
-      'TheOdinProject/Javascript',
-      'TheOdinProject/Rails',
-      'TheOdinProject/Ruby',
-      'TheOdinProject/Interesting-Stuff',
-      'TheOdinProject/vim',
       'TheOdinProject/HTML-CSS',
-      // 'TheOdinProject/theodinproject',
       // 'codyloyd',
       'TheOdinProject/secretbotroom'
     ],
