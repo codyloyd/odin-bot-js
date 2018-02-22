@@ -1,4 +1,4 @@
-﻿'use strict'
+'use strict'
 
 var request = require('request')
 var config = require('../config.js')
@@ -239,6 +239,12 @@ function botResponseHoldOn({ room }) {
 function botResponseNotNice ({ room }) {
   chatHelpers.send(
     'http://media.riffsy.com/images/636a97aa416ad674eb2b72d4a6e9ad6c/tenor.gif', room
+  )
+}
+
+function botResponseLMGTFY ({text, room }) {
+  chatHelpers.send(
+    helpers.textToQuery(text), room
   )
 }
 

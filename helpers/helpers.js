@@ -66,6 +66,16 @@ function getNamesFromText(text) {
   return matches
 }
 
+function textToQuery(text) {
+  var query = text.split(" ");
+  var url = "http://lmgtfy.com/?q=";
+  
+  query.forEach(function(element){
+    if (element == query[0]) { url += element}
+    else {url += "+" + element}
+  });
+  return url;
+}
 exports.getNamesFromText = getNamesFromText
 exports.requestUser = requestUser
 exports.getMentions = getMentions
