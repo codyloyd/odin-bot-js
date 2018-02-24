@@ -83,3 +83,4 @@ exports.randomInt = randomInt
 exports.elapsedTime = elapsedTime
 exports.pointsPluralizer = pointsPluralizer
 exports.exclamation = exclamation
+exports.textToQuery = textToQuery

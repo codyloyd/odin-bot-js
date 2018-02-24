@@ -3,48 +3,10 @@
 var request = require('request')
 var config = require('../config.js')
 var winston = require('winston');
-var time
-
-var apiai = require('apiai')
-var aiapp = apiai(config.apiai.apikey)
 var weatherKey = config.weatherAPI.weatherApiKey
-
 var helpers = require('../helpers/helpers.js')
 var chatHelpers = require('../helpers/chatHelpers.js')
 var { respondWithGif } = require('./giphy')
-
-// function botResponseChat({room, text}) {
-//   var request = aiapp.textRequest(text, {
-//     sessionId: '14'
-//   })
-//   request.on('response', function(response) {
-//     // console.log(response)
-//     const speech = response.result.fulfillment.speech
-//     const action = response.result.action
-//     if (speech) {
-//       chatHelpers.send(speech, room)
-//     }
-//     if (action == 'sendGif') {
-//       respondWithGif('hi', room)
-//     }
-//   })
-//   request.on('error', function(error) {
-//     console.log(error)
-//   })
-//   request.end()
-// }
-
-// function respondWithGif(searchTerm, room) {
-//   const gifs = ['hi', 'love', 'pizza', 'kiss']
-//   chooseRandomGif(gifs[helpers.randomInt(gifs.length)])
-//     .then(function(image) {
-//       var feedContent = `[![](${image.imageUrl})](${image.url})`
-//       chatHelpers.send(feedContent, room)
-//     })
-//     .catch(function() {
-//       chatHelpers.send('there was an error', room)
-//     })
-// }
 
 function botResponseUseLinux({ room }) {
   chatHelpers.send(
@@ -67,6 +29,10 @@ function botResponseHug({ room }) {
 
 function botResponseShrug({ room }) {
   chatHelpers.send(String.raw`¯\\\_(ツ)_/¯`, room)
+}
+
+function botResponseShurg({ room }) {
+  chatHelpers.send(String.raw`¯\\\_()_ツ/¯`, room)
 }
 
 function botResponseHello({ room, data: { fromUser: { displayName: name } } }) {
@@ -97,7 +63,7 @@ function botResponseCode({ room }) {
     > \\\`\\\`\\\`
     > [Put your Code here!]
     > \\\`\\\`\\\`
-    > For `inline code` use one backtick:
+    > For \`inline code\` use one backtick:
     >\\\`Code here!\\\``,
     room
   )
@@ -116,9 +82,9 @@ function botResponsePartyParrot({ room, text }) {
     'http://cultofthepartyparrot.com/parrots/stableparrot.gif',
     'http://cultofthepartyparrot.com/parrots/twinsparrot.gif',
     'http://cultofthepartyparrot.com/parrots/hd/dealwithitparrot.gif',
-    'http://cultofthepartyparrot.com/parrots/tripletsparrot.gif'
-    // 'http://emojis.slackmojis.com/emojis/images/1450738632/246/leftshark.png',
-    // 'http://emojis.slackmojis.com/emojis/images/1472757675/1132/otter-dance.gif'
+    'http://cultofthepartyparrot.com/parrots/tripletsparrot.gif',
+    'http://emojis.slackmojis.com/emojis/images/1450738632/246/leftshark.png',
+    'http://emojis.slackmojis.com/emojis/images/1472757675/1132/otter-dance.gif'
   ]
 
   if (text.toLowerCase().match('   p')) {
@@ -134,13 +100,6 @@ function botResponsePartyParrot({ room, text }) {
     chatHelpers.send(`![]( ${parrots[index]} )`, room)
   }
 }
-
-// function botResponseWindows({ room }) {
-//   if (parseInt(Math.random() * 10) == 0) {
-//     chatHelpers.send('![](http://i.imgur.com/q9s5OKr.gif)', room)
-//     chatHelpers.send('##did I hear someone say something about WINDOWS?', room)
-//   }
-// }
 
 function botResponseDontGiveUp({
   text,
@@ -172,15 +131,6 @@ function botResponseJustDoIt({
     `${mentions} What are you waiting for?! https://www.youtube.com/watch?v=ZXsQAXx_ao0`,
     room
   )
-}
-
-function botResponseChuck({ room }) {
-  request("http://api.icndb.com/jokes/random", function(error, response, body) {
-    const json = JSON.parse(body)
-    var value = json["value"]
-    var joke = value["joke"]
-    chatHelpers.send(joke, room)
-  })
 }
 
 function botResponseWeatherInCity({text, room}) {
@@ -227,10 +177,6 @@ function botResponseWeatherInCity({text, room}) {
   )
 }
 
-function botResponseSpoopy({room}) {
-  chatHelpers.send('https://media.giphy.com/media/EHKRUd3NpbHFe/giphy.gif', room)
-}
-
 function botResponseHoldOn({ room }) {
   chatHelpers.send(
     `![](https://media.giphy.com/media/l1J9zVWOtZHcDfZ5u/giphy.gif)`, room
@@ -244,25 +190,23 @@ function botResponseNotNice ({ room }) {
 }
 
 function botResponseLMGTFY ({text, room }) {
-  chatHelpers.send(
-    helpers.textToQuery(text), room
+  const query = text.match(/(?!\/google.?) .*/)[0].trim()
+  chatHelpers.send(`[Here's your result!](
+    ${helpers.textToQuery(query)})`, room
   )
 }
 
-exports.botResponseSpoopy = botResponseSpoopy
-exports.botResponseUseLinux = botResponseUseLinux
 exports.botResponseGandalf = botResponseGandalf
 exports.botResponseHug = botResponseHug
 exports.botResponseHello = botResponseHello
 exports.botResponseHelp = botResponseHelp
 exports.botResponsePartyParrot = botResponsePartyParrot
 exports.botResponseWeatherInCity = botResponseWeatherInCity
-// exports.botResponseWindows = botResponseWindows
 exports.botResponseDontGiveUp = botResponseDontGiveUp
 exports.botResponseJustDoIt = botResponseJustDoIt
 exports.botResponseCode = botResponseCode
-exports.botResponseChuck = botResponseChuck
 exports.botResponseShrug = botResponseShrug
-// exports.botResponseChat = botResponseChat
+exports.botResponseShurg = botResponseShurg
 exports.botResponseHoldOn = botResponseHoldOn
 exports.botResponseNotNice = botResponseNotNice
+exports.botResponseLMGTFY = botResponseLMGTFY

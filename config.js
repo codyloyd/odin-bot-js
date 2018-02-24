@@ -1,4 +1,5 @@
 'use strict'
+require('dotenv').config()
 
 var config = {
   // gitter settings for retrieving and sending messages
@@ -10,14 +11,14 @@ var config = {
       'TheOdinProject/theodinproject',
       'TheOdinProject/Front-End',
       'TheOdinProject/Back-End',
-      'TheOdinProject/Off-Topic',
       'TheOdinProject/Contributing',
       'TheOdinProject/Getting-Hired',
       'TheOdinProject/ModTeam',
       'TheOdinProject/Random',
-      'TheOdinProject/HTML-CSS',
-      // 'codyloyd',
-      'TheOdinProject/secretbotroom'
+      'TheOdinProject/VIM',
+      'TheOdinProject/Javascript',
+      'codyloyd',
+      // 'TheOdinProject/secretbotroom'
     ],
     place: 'chat'
   },

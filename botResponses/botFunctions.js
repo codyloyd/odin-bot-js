@@ -23,10 +23,6 @@ var botFunctions = {
     condition: /partyparrot|party_parrot|party parrot|oiseau/,
     response: responses.botResponsePartyParrot
   },
-  /*windows: {
-    condition: /windows/,
-    response: responses.botResponseWindows
-  },*/
   hello: {
     condition: /hello odin-bot|hello bot|hi odin-bot|hi bot/,
     response: responses.botResponseHello
@@ -63,18 +59,10 @@ var botFunctions = {
     condition: /\/shrug/,
     response: responses.botResponseShrug,
   },  
-  spoopy: {
-    condition: /spoopy/,
-    response: responses.botResponseSpoopy,
-  },
-  // chatWithBot: {
-  //   condition: /bot\b|hello|hi/,
-  //   response: responses.botResponseChat
-  // }
-  chuck: {
-    condition: /\/chuck norris/,
-    response: responses.botResponseChuck
-  },
+  shurg: {
+    condition: /\/shurg/,
+    response: responses.botResponseShurg,
+  },  
   justasecond: {
     condition: /^\/jas\b|^\/holdon\b/igm,
     response: responses.botResponseHoldOn
