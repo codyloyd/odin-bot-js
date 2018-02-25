@@ -72,7 +72,7 @@ var botFunctions = {
     response: responses.botResponseNotNice
   },
   lmgtfy: {
-    condition: /\/google.*/,
+    condition: /^\/google.*/,
     response: responses.botResponseLMGTFY
   }
 }
