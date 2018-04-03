@@ -35,10 +35,6 @@ var botFunctions = {
     condition: /\/hug/,
     response: responses.botResponseHug
   },
-  // uselinux: {
-  //   condition: /\/windows/,
-  //   response: responses.botResponseUseLinux
-  // },
   motivate: {
     condition: /\/motivate/,
     response: responses.botResponseDontGiveUp
