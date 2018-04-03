@@ -8,13 +8,13 @@ var helpers = require('../helpers/helpers.js')
 var chatHelpers = require('../helpers/chatHelpers.js')
 var { respondWithGif } = require('./giphy')
 
-function botResponseUseLinux({ room }) {
-  chatHelpers.send(
-    `[Why you shouldn't use Windows for TOP.](https://medium.com/@codyloyd/why-cant-i-use-windows-for-the-odin-project-bf20a4bb135f#.29b6s6fp5)
-     - [If you need to, check out Windows Subsystem for Linux](http://wsl-guide.org/)`,
-    room
-  )
-}
+// function botResponseUseLinux({ room }) {
+//   chatHelpers.send(
+//     `[Why you shouldn't use Windows for TOP.](https://medium.com/@codyloyd/why-cant-i-use-windows-for-the-odin-project-bf20a4bb135f#.29b6s6fp5)
+//      - [If you need to, check out Windows Subsystem for Linux](http://wsl-guide.org/)`,
+//     room
+//   )
+// }
 
 function botResponseGandalf({ room }) {
   chatHelpers.send(
