@@ -58,7 +58,11 @@ var botFunctions = {
   shurg: {
     condition: /\/shurg/,
     response: responses.botResponseShurg,
-  },  
+  },
+  smart: {
+    condition: /\/smart/,
+    response: responses.botResponseSmart,
+  },    
   justasecond: {
     condition: /^\/jas\b|^\/holdon\b/igm,
     response: responses.botResponseHoldOn
