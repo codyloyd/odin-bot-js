@@ -28,6 +28,10 @@ function botResponseShurg({ room }) {
 }
 
 function botResponseSmart({ room }) {
+  chatHelpers.send(String.raw`(╯°□°）╯︵ ┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻ `, room)
+}
+
+function botResponseSmart({ room }) {
   chatHelpers.send(String.raw`f(ಠ‿↼)z`, room)
 }
 
@@ -204,6 +208,7 @@ exports.botResponseCode = botResponseCode
 exports.botResponseShrug = botResponseShrug
 exports.botResponseShurg = botResponseShurg
 exports.botResponseSmart = botResponseSmart
+exports.botResponseFlip = botResponseFlip
 exports.botResponseHoldOn = botResponseHoldOn
 exports.botResponseNotNice = botResponseNotNice
 exports.botResponseLMGTFY = botResponseLMGTFY
