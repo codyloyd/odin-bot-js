@@ -31,7 +31,7 @@ function botResponseSmart({ room }) {
   chatHelpers.send(String.raw`(╯°□°）╯︵ ┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻ `, room)
 }
 
-function botResponseSmart({ room }) {
+function botResponseFlip({ room }) {
   chatHelpers.send(String.raw`f(ಠ‿↼)z`, room)
 }
 
