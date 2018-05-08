@@ -63,6 +63,10 @@ var botFunctions = {
     condition: /\/smart/,
     response: responses.botResponseSmart,
   },    
+  flip: {
+    condition: /\/flip/,
+    response: responses.botResponseFlip,
+  },    
   justasecond: {
     condition: /^\/jas\b|^\/holdon\b/igm,
     response: responses.botResponseHoldOn

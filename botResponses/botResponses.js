@@ -31,6 +31,10 @@ function botResponseSmart({ room }) {
   chatHelpers.send(String.raw`f(ಠ‿↼)z`, room)
 }
 
+function botResponseFlip({ room }) {
+  chatHelpers.send(String.raw`(╯°□°）╯︵ ┻━━━━┻ `, room)
+}
+
 function botResponseHello({ room, data: { fromUser: { displayName: name } } }) {
   chatHelpers.send(`oh hi there ${name}`, room)
   respondWithGif('hi', room)
@@ -204,6 +208,7 @@ exports.botResponseCode = botResponseCode
 exports.botResponseShrug = botResponseShrug
 exports.botResponseShurg = botResponseShurg
 exports.botResponseSmart = botResponseSmart
+exports.botResponseFlip = botResponseFlip
 exports.botResponseHoldOn = botResponseHoldOn
 exports.botResponseNotNice = botResponseNotNice
 exports.botResponseLMGTFY = botResponseLMGTFY
