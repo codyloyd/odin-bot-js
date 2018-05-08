@@ -28,7 +28,7 @@ function botResponseShurg({ room }) {
 }
 
 function botResponseSmart({ room }) {
-  chatHelpers.send(String.raw`(╯°□°）╯︵ ┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻ `, room)
+  chatHelpers.send(String.raw`(╯°□°）╯︵ ┻━━━━┻ `, room)
 }
 
 function botResponseFlip({ room }) {
