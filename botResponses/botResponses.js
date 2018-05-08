@@ -28,11 +28,11 @@ function botResponseShurg({ room }) {
 }
 
 function botResponseSmart({ room }) {
-  chatHelpers.send(String.raw`(╯°□°）╯︵ ┻━━━━┻ `, room)
+  chatHelpers.send(String.raw`f(ಠ‿↼)z`, room)
 }
 
 function botResponseFlip({ room }) {
-  chatHelpers.send(String.raw`f(ಠ‿↼)z`, room)
+  chatHelpers.send(String.raw`(╯°□°）╯︵ ┻━━━━┻ `, room)
 }
 
 function botResponseHello({ room, data: { fromUser: { displayName: name } } }) {
