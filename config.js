@@ -17,6 +17,7 @@ var config = {
       'TheOdinProject/Random',
       'TheOdinProject/VIM',
       'TheOdinProject/Javascript',
+      'TheOdinProject/tech_support',
       'codyloyd',
       // 'TheOdinProject/secretbotroom'
     ],
