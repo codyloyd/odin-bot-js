@@ -17,6 +17,7 @@ var config = {
       'TheOdinProject/Random',
       'TheOdinProject/VIM',
       'TheOdinProject/Javascript',
+      'TheOdinProject/bot-spam-playground',
       'codyloyd',
       // 'TheOdinProject/secretbotroom'
     ],
